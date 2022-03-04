@@ -36,7 +36,7 @@ if __name__ == '__main__':
         for j in range(config.epoch):
             print(train_list[i] + '\nEpoch ' + str(j) + '/' + str(config.epoch))  # 打印当前训练的训练集和代数
             # 开始训练
-            model.fit(
+            history = model.fit(
                 x_train, y_train,
                 batch_size=config.batch_size,
                 epochs=1,

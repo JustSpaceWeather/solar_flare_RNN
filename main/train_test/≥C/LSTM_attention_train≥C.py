@@ -37,7 +37,8 @@ if __name__ == '__main__':
                 learning_rate=config.learning_rate,
                 dropout_rate=config.dropout_rate,
                 glorot_normal_seed=config.glorot_normal_seed,
-                score_metrics=config.score_metrics
+                score_metrics=config.score_metrics,
+                batch_size=config.batch_size
             )
             # 评价指标初始化
             best_TSS = float('-inf')
@@ -53,7 +54,7 @@ if __name__ == '__main__':
                     class_weight=train_weight_dir,  # {dict, 'balanced'},
                     validation_data=(x_test, y_test),
                 )
-                #             # 开始评价
+                # 开始评价
                 y_true = y_test.argmax(axis=1)  # 真实的标签
                 y_pred = model.predict(x_test, batch_size=config.batch_size).argmax(axis=1)  # 将数据传入，得到预测的标签
                 each_model_save_path = p + '/weights/LSTM_attention_best≥C/time_steps=' + str(time_steps)

@@ -10,7 +10,8 @@ def get_LSTM_attention_model(time_steps,
                              learning_rate: float,
                              dropout_rate: float,
                              glorot_normal_seed: int,
-                             score_metrics: list):
+                             score_metrics: list,
+                             batch_size: int):
     """
     获得编译好的lstm模型
     :param time_steps: 时间步
@@ -32,7 +33,7 @@ def get_LSTM_attention_model(time_steps,
         ),
         Dropout(dropout_rate),
         BatchNormalization(),
-        Attention(120),
+        Attention((batch_size, time_steps)),
         # 第二层
         Dense(
             units=128,
