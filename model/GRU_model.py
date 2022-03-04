@@ -1,4 +1,4 @@
-from tensorflow import keras
+import keras
 from keras.models import Sequential
 from keras.layers import InputLayer, GRU, Dense, Dropout, BatchNormalization, Activation
 from keras.optimizers import Adam

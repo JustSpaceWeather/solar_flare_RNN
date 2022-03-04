@@ -1,8 +1,8 @@
-from tensorflow import keras
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import InputLayer, Dense, Dropout, BatchNormalization, Activation
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.initializers import glorot_normal
+import keras
+from keras.models import Sequential
+from keras.layers import InputLayer, Dense, Dropout, BatchNormalization, Activation
+from keras.optimizers import Adam
+from keras.initializers import glorot_normal
 
 
 def get_NN_model(learning_rate: float, dropout_rate: float, glorot_normal_seed: int, score_metrics: list):

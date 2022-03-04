@@ -1,12 +1,15 @@
-from tensorflow import keras
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import InputLayer, LSTM, Dense, Dropout, BatchNormalization, Activation
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.initializers import glorot_normal
+import keras
+from keras.models import Sequential
+from keras.layers import InputLayer, LSTM, Dense, Dropout, BatchNormalization, Activation
+from keras.optimizers import Adam
+from keras.initializers import glorot_normal
 from layer.attention import Attention
 
 
-def get_LSTM_attention_model(time_steps, learning_rate: float, dropout_rate: float, glorot_normal_seed: int,
+def get_LSTM_attention_model(time_steps,
+                             learning_rate: float,
+                             dropout_rate: float,
+                             glorot_normal_seed: int,
                              score_metrics: list):
     """
     获得编译好的lstm模型
@@ -24,11 +27,12 @@ def get_LSTM_attention_model(time_steps, learning_rate: float, dropout_rate: flo
         LSTM(
             units=128,
             kernel_initializer=glorot_normal(glorot_normal_seed),
-            activation='tanh'
+            activation='tanh',
+            return_sequences=True
         ),
         Dropout(dropout_rate),
         BatchNormalization(),
-        Attention(128),
+        Attention(120),
         # 第二层
         Dense(
             units=128,
