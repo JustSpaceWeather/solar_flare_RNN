@@ -16,6 +16,7 @@ class Attention(Layer):
             3D tensor with shape: `(samples, steps, features)`.
         # Output shape
             2D tensor with shape: `(samples, features)`.
+        :param step_dim: time_steps
         :param kwargs:
         Just put it on top of an RNN Layer (GRU/LSTM/SimpleRNN) with return_sequences=True.
         The dimensions are inferred based on the output shape of the RNN.
@@ -32,6 +33,9 @@ class Attention(Layer):
         self.supports_masking = True
         self.init = initializers.get('glorot_uniform')
 
+        self.W = None
+        self.b = None
+
         self.W_regularizer = regularizers.get(W_regularizer)
         self.b_regularizer = regularizers.get(b_regularizer)
 
@@ -40,20 +44,18 @@ class Attention(Layer):
 
         self.bias = bias
         self.step_dim = step_dim
-        self.features_dim = 0
+        self.features_dim = None
 
         super(Attention, self).__init__(**kwargs)
 
     def build(self, input_shape):
         assert len(input_shape) == 3
-
         self.W = self.add_weight(shape=(input_shape[-1],),
                                  initializer=self.init,
                                  name='{}_W'.format(self.name),
                                  regularizer=self.W_regularizer,
                                  constraint=self.W_constraint)
         self.features_dim = input_shape[-1]
-
         if self.bias:
             self.b = self.add_weight(shape=(input_shape[1],),
                                      initializer='zero',
@@ -62,23 +64,26 @@ class Attention(Layer):
                                      constraint=self.b_constraint)
         else:
             self.b = None
-
         self.built = True
 
-    def compute_mask(self, input, input_mask=None):
+    def compute_mask(self, input_data, input_mask=None):
         # do not pass the mask to the next layers
         return None
 
     def call(self, x, mask=None):
         features_dim = self.features_dim
         step_dim = self.step_dim
-
-        e = K.reshape(K.dot(K.reshape(x, (-1, features_dim)), K.reshape(self.W, (features_dim, 1))),
-                      (-1, step_dim))  # e = K.dot(x, self.W)
+        # e = K.dot(x, self.W)
+        e = K.reshape(
+            K.dot(
+                K.reshape(x, (-1, features_dim)),
+                K.reshape(self.W, (features_dim, 1))
+            ),
+            (-1, step_dim)
+        )
         if self.bias:
             e += self.b
         e = K.tanh(e)
-
         a = K.exp(e)
         # apply mask after the exp. will be re-normalized next
         if mask is not None:
@@ -88,7 +93,6 @@ class Attention(Layer):
         # and this results in NaN's. A workaround is to add a very small positive number ε to the sum.
         a /= K.cast(K.sum(a, axis=1, keepdims=True) + K.epsilon(), K.floatx())
         a = K.expand_dims(a)
-
         c = K.sum(a * x, axis=1)
         return c
 

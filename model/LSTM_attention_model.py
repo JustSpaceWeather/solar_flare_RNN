@@ -31,13 +31,13 @@ def get_LSTM_attention_model(time_steps,
             activation='tanh',
             return_sequences=True
         ),
+        Attention(step_dim=time_steps),
         Dropout(dropout_rate),
         BatchNormalization(),
-        Attention((batch_size, time_steps)),
         # 第二层
         Dense(
             units=128,
-            kernel_initializer=glorot_normal(glorot_normal_seed)
+            kernel_initializer=glorot_normal(glorot_normal_seed),
         ),
         Dropout(dropout_rate),
         BatchNormalization(),
