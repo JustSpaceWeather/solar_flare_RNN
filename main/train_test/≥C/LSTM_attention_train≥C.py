@@ -37,8 +37,7 @@ if __name__ == '__main__':
                 learning_rate=config.learning_rate,
                 dropout_rate=config.dropout_rate,
                 glorot_normal_seed=config.glorot_normal_seed,
-                score_metrics=config.score_metrics,
-                batch_size=config.batch_size
+                score_metrics=config.score_metrics
             )
             # 评价指标初始化
             best_TSS = float('-inf')

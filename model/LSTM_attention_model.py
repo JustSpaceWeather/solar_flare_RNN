@@ -10,16 +10,15 @@ def get_LSTM_attention_model(time_steps,
                              learning_rate: float,
                              dropout_rate: float,
                              glorot_normal_seed: int,
-                             score_metrics: list,
-                             batch_size: int):
+                             score_metrics: list):
     """
-    获得编译好的lstm模型
+    获得编译好的lstmAtt模型
     :param time_steps: 时间步
     :param learning_rate: 学习率
     :param dropout_rate: 神经元失活率
     :param glorot_normal_seed: Glorot正态分布初始化方法随机数种子
     :param score_metrics: 评价指标
-    :return: 编译好的lstm模型
+    :return: 编译好的lstmAtt模型
     """
     keras.initializers.he_normal(521)
     model = Sequential([
@@ -33,8 +32,9 @@ def get_LSTM_attention_model(time_steps,
         ),
         Dropout(dropout_rate),
         BatchNormalization(),
+        # 第二层Attention
         Attention(step_dim=time_steps),
-        # 第二层
+        # 第三层
         Dense(
             units=128,
             kernel_initializer=glorot_normal(glorot_normal_seed),
@@ -42,7 +42,7 @@ def get_LSTM_attention_model(time_steps,
         Dropout(dropout_rate),
         BatchNormalization(),
         Activation('relu'),
-        # 第三层
+        # 第四层
         Dense(
             units=64,
             kernel_initializer=glorot_normal(glorot_normal_seed)
@@ -50,7 +50,7 @@ def get_LSTM_attention_model(time_steps,
         Dropout(dropout_rate),
         BatchNormalization(),
         Activation('relu'),
-        # 第四层输出层
+        # 第五层输出层
         Dense(
             units=2,
             activation='softmax',

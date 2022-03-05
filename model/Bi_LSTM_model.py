@@ -26,7 +26,8 @@ def get_Bi_LSTM_model(time_steps,
         Bidirectional(
             LSTM(
                 units=128,
-                kernel_initializer=glorot_normal(glorot_normal_seed)
+                kernel_initializer=glorot_normal(glorot_normal_seed),
+                activation='tanh'
             ),
         ),
         Dropout(dropout_rate),
