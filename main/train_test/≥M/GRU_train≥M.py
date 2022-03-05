@@ -10,15 +10,10 @@ from util.load_data import load_data_M
 from util.load_data import Rectify
 from util.set_seed import set_seed
 from util.score import show_score_and_save_weights
+from config.Config import TrainConfig
 
 # 训练参数
-learning_rate = 1e-3
-dropout_rate = 0.5
-glorot_normal_seed = 369
-score_metrics = []
-epoch = 100
-batch_size = 120
-time_steps_list = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]
+config = TrainConfig()
 set_seed()
 
 train_list = load_data_list(p + r'\data\30_train_85858585\10_best_train')
@@ -27,7 +22,7 @@ test_list = load_data_list(p + r'\data\30_test_85858585\10_best_test')
 best_TSS_dir = {}
 
 if __name__ == '__main__':
-    for time_steps in time_steps_list:
+    for time_steps in config.time_steps_list:
         best_TSS_list = []  # 保存每个训练集的最好的TSS
         for i in range(10):
             (x_train, y_train, train_weight_dir), (x_test, y_test, test_weight_dir) = load_data_M(train_list[i],
@@ -38,22 +33,22 @@ if __name__ == '__main__':
             y_test = Rectify(y_test, time_steps)
             model = get_GRU_model(
                 time_steps=time_steps,
-                learning_rate=learning_rate,
-                dropout_rate=dropout_rate,
-                glorot_normal_seed=glorot_normal_seed,
-                score_metrics=score_metrics
+                learning_rate=config.learning_rate,
+                dropout_rate=config.dropout_rate,
+                glorot_normal_seed=config.glorot_normal_seed,
+                score_metrics=config.score_metrics
             )
             # 评价指标初始化
             best_TSS = float('-inf')
-            for j in range(epoch):
+            for j in range(config.epoch):
                 print("time_steps =", time_steps)
-                print(train_list[i] + '\nEpoch ' + str(j) + '/' + str(epoch))  # 打印当前训练的训练集和代数
+                print(train_list[i] + '\nEpoch ' + str(j) + '/' + str(config.epoch))  # 打印当前训练的训练集和代数
                 # 开始训练
                 model.fit(
                     x_train, y_train,
-                    batch_size=batch_size,
+                    batch_size=config.batch_size,
                     epochs=1,
-                    verbose=1,
+                    verbose=config.verbose,
                     class_weight=train_weight_dir,  # {dict, 'balanced'},
                     validation_data=(x_test, y_test),
                 )

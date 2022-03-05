@@ -48,7 +48,7 @@ if __name__ == '__main__':
                     x_train, y_train,
                     batch_size=config.batch_size,
                     epochs=1,
-                    verbose=1,
+                    verbose=config.verbose,
                     class_weight=train_weight_dir,  # {dict, 'balanced'},
                     validation_data=(x_test, y_test),
                 )

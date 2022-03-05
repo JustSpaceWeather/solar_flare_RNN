@@ -6,11 +6,11 @@ from keras.initializers import glorot_normal
 from layer.attention import Attention
 
 
-def get_Bi_GRU_model(time_steps: int,
-                     learning_rate: float,
-                     dropout_rate: float,
-                     glorot_normal_seed: int,
-                     score_metrics: list):
+def get_Bi_GRU_attention_model(time_steps: int,
+                               learning_rate: float,
+                               dropout_rate: float,
+                               glorot_normal_seed: int,
+                               score_metrics: list):
     """
     获得编译好的双向lstm模型
     :param time_steps: 时间步
