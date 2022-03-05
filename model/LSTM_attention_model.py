@@ -31,9 +31,9 @@ def get_LSTM_attention_model(time_steps,
             activation='tanh',
             return_sequences=True
         ),
-        Attention(step_dim=time_steps),
         Dropout(dropout_rate),
         BatchNormalization(),
+        Attention(step_dim=time_steps),
         # 第二层
         Dense(
             units=128,
