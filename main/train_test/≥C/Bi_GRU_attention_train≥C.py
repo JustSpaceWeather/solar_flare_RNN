@@ -13,7 +13,6 @@ from util.score import show_score_and_save_weights
 from config.Config import TrainConfig
 
 # 训练参数
-
 config = TrainConfig()
 set_seed()
 
