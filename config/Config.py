@@ -14,5 +14,5 @@ class TrainConfig(object):
         self.score_metrics = ['acc']
         self.epoch = 100
         self.batch_size = 120
-        self.time_steps_list = [40, 60, 120]  # 1, 10, 12, 15, 20, 24,30 , 40, 60, 120
+        self.time_steps_list = [24, 30, 40, 60, 120]  # 1, 10, 12, 15, 20,
         self.verbose = 1
