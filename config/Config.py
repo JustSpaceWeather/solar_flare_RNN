@@ -17,3 +17,16 @@ class TrainConfig(object):
         self.time_steps_list = [24, 30, 40, 60, 120]  # 1, 10, 12, 15, 20 ,
         # 0不显示结果和进度条，1显示结果和进度条，2只显示结果不显示进度条
         self.verbose = 1
+
+
+class TTFileConfig(object):
+    def __init__(self, p):
+        self.train_file = p + r'\data\TT\30_train_85858585\10_best_train'
+        self.test_file = p + r'\data\TT\30_test_85858585\10_best_test'
+
+
+class TVTFileConfig(object):
+    def __init__(self, p):
+        self.train_file = ''
+        self.valid_file = ''
+        self.test_file = ''

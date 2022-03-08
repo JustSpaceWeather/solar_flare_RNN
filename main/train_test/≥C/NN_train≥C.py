@@ -10,15 +10,17 @@ from util.load_data import load_data_C
 from util.set_seed import set_seed
 from util.score import show_score_and_save_weights
 from config.Config import TrainConfig
-
-set_seed()
-
-train_list = load_data_list(p + r'\data\30_train_85858585\10_best_train')
-test_list = load_data_list(p + r'\data\30_test_85858585\10_best_test')
+from config.Config import TTFileConfig
 
 # 训练参数
+file_config = TTFileConfig(p)
 config = TrainConfig()
+set_seed()
 time_steps = 1
+
+train_list = load_data_list(file_config.train_file)
+test_list = load_data_list(file_config.test_file)
+
 best_TSS_list = []  # 保存每个训练集的最好的TSS
 
 if __name__ == '__main__':
