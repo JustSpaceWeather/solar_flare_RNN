@@ -4,7 +4,7 @@ import os
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.append(p)
 
-from model.LSTM_model import get_LSTM_model
+from model.Bi_LSTM_model import get_Bi_LSTM_model
 from util.load_data import load_data_list
 from util.load_data import load_data_M
 from util.load_data import Rectify
@@ -33,7 +33,7 @@ if __name__ == '__main__':
             x_test = x_test.reshape(-1, time_steps, 10)
             y_train = Rectify(y_train, time_steps)
             y_test = Rectify(y_test, time_steps)
-            model = get_LSTM_model(
+            model = get_Bi_LSTM_model(
                 time_steps=time_steps,
                 learning_rate=config.learning_rate,
                 dropout_rate=config.dropout_rate,
@@ -44,7 +44,7 @@ if __name__ == '__main__':
             best_TSS = float('-inf')
             for j in range(config.epoch):
                 print("time_steps =", time_steps)
-                print(train_list[i] + '\nEpoch ' + str(j) + '/' + str(epoch))  # 打印当前训练的训练集和代数
+                print(train_list[i] + '\nEpoch ' + str(j) + '/' + str(config.epoch))  # 打印当前训练的训练集和代数
                 # 开始训练
                 model.fit(
                     x_train, y_train,
