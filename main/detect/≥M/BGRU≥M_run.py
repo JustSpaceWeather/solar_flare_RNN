@@ -5,7 +5,7 @@ import numpy as np
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.append(p)
 
-from util.load_data import load_train_or_test_C
+from util.load_data import load_train_or_test_M
 from util.load_data import load_data_list
 from model.Bi_GRU_model import get_Bi_GRU_model
 from util.scoreClass import Metric
@@ -35,23 +35,22 @@ if __name__ == '__main__':
         for i in range(10):
             # print(test_list[i])
             all_nums += 1
-            x_test, y_test, test_weight_dir = load_train_or_test_C(test_list[i])
+            x_test, y_test, test_weight_dir = load_train_or_test_M(test_list[i])
             # 载入模型
-            model = get_Bi_GRU_model(learning_rate=1e-4, dropout_rate=0.0, glorot_normal_seed=369,
-                                     score_metrics=score_metrics, time_steps=time_steps)
+            model = get_Bi_GRU_model(
+                learning_rate=1e-4,
+                dropout_rate=0.0,
+                glorot_normal_seed=369,
+                score_metrics=score_metrics,
+                time_steps=time_steps
+            )
             model.load_weights(
-                p + r'\weights\Bi_GRU_best≥C\time_steps=' + str(time_steps) + r'\Bi_GRU_C_' + str(
+                p + r'\weights\Bi_GRU_best≥M\time_steps=' + str(time_steps) + r'\Bi_GRU_M_' + str(
                     time_steps
                 ) + '_best_' + str(i) + '.h5'
             )
-            # print(
-            #     p + r'\weights\LSTM_best≥C\time_steps=' + str(time_steps) + r'\LSTM_C_' + str(
-            #         time_steps
-            #     ) + '_best_' + str(i) + '.h5'
-            # )
             # 根据时间步修改测试集shape
             x_test_time_step = x_test.reshape(-1, time_steps, 10)
-            y_test_time_step = Rectify(y_test, time_steps)
             y_test_time_step = Rectify(y_test, time_steps)
             # 开始预测
             y_true = y_test_time_step.argmax(axis=1)

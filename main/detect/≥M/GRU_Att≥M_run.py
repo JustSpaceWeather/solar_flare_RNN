@@ -5,7 +5,7 @@ import numpy as np
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.append(p)
 
-from util.load_data import load_train_or_test_C
+from util.load_data import load_train_or_test_M
 from util.load_data import load_data_list
 from model.GRU_attention_model import get_GRU_attention_model
 from util.scoreClass import Metric
@@ -35,12 +35,17 @@ if __name__ == '__main__':
         for i in range(10):
             # print(test_list[i])
             all_nums += 1
-            x_test, y_test, test_weight_dir = load_train_or_test_C(test_list[i])
+            x_test, y_test, test_weight_dir = load_train_or_test_M(test_list[i])
             # 载入模型
-            model = get_GRU_attention_model(learning_rate=1e-4, dropout_rate=0.0, glorot_normal_seed=369,
-                                            score_metrics=score_metrics, time_steps=time_steps)
+            model = get_GRU_attention_model(
+                learning_rate=1e-4,
+                dropout_rate=0.0,
+                glorot_normal_seed=369,
+                score_metrics=score_metrics,
+                time_steps=time_steps
+            )
             model.load_weights(
-                p + r'\weights\GRU_attention_best≥C\time_steps=' + str(time_steps) + r'\GRU_attention_C_' + str(
+                p + r'\weights\GRU_attention_best≥M\time_steps=' + str(time_steps) + r'\GRU_attention_M_' + str(
                     time_steps
                 ) + '_best_' + str(i) + '.h5'
             )
