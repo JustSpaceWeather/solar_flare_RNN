@@ -62,7 +62,7 @@ def get_Bi_GRU_attention_model(time_steps: int,
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,
-        loss='categorical_crossentropy',  # 'categorical_crossentropy',  # 交叉熵
+        loss='binary_crossentropy',  # binary_crossentropy 二进制交叉熵用于二分类问题中，categorical_crossentropy分类交叉熵适用于多分类问题中
         metrics=score_metrics  # 准确率,
     )
     return model
