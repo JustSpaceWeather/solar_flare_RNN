@@ -44,7 +44,8 @@ if __name__ == '__main__':
             best_TSS = float('-inf')
             for j in range(config.epoch):
                 print("time_steps =", time_steps)
-                print(train_list[i] + '\nEpoch ' + str(j) + '/' + str(config.epoch))  # 打印当前训练的训练集和代数
+                print(train_list[i] + '\n' + valid_list[i] + '\nEpoch ' + str(j) + '/' + str(
+                    config.epoch))  # 打印当前训练的训练集和代数
                 # 开始训练
                 model.fit(
                     x_train, y_train,
