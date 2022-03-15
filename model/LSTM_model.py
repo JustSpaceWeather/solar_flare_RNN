@@ -51,7 +51,7 @@ def get_LSTM_model(time_steps, learning_rate: float, dropout_rate: float, glorot
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,
-        loss='categorical_crossentropy',  # 交叉熵
+        loss='binary_crossentropy',  # 交叉熵
         metrics=score_metrics
     )
     return model

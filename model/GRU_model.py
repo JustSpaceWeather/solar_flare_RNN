@@ -56,7 +56,7 @@ def get_GRU_model(time_steps,
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,
-        loss='categorical_crossentropy',  # 交叉熵
+        loss='binary_crossentropy',  # 交叉熵
         metrics=score_metrics
     )
     return model

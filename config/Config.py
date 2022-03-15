@@ -14,9 +14,8 @@ class TrainConfig(object):
         self.score_metrics = ['acc']
         self.epoch = 100
         self.batch_size = 120
-        self.time_steps_list = [120]  # 1, 10, 12, 15, 20, 24, 30, 40, 60, 120
-        # 0不显示结果和进度条，1显示结果和进度条，2只显示结果不显示进度条
-        self.verbose = 1
+        self.time_steps_list = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]  #
+        self.verbose = 1  # 0不显示结果和进度条，1显示结果和进度条，2只显示结果不显示进度条
 
 
 class TTFileConfig(object):

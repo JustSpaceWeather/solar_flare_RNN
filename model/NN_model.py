@@ -47,7 +47,7 @@ def get_NN_model(learning_rate: float, dropout_rate: float, glorot_normal_seed: 
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,
-        loss='categorical_crossentropy',  # 'categorical_crossentropy',  # 交叉熵
+        loss='binary_crossentropy',  # 'categorical_crossentropy',  # 交叉熵
         metrics=score_metrics  # [Accuracy, TSS, FAR, HSS, Precision, Recall]  # 准确率,
     )
     return model

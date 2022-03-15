@@ -58,7 +58,7 @@ def get_Bi_GRU_model(time_steps: int,
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,
-        loss='categorical_crossentropy',  # 'categorical_crossentropy',  # 交叉熵
+        loss='binary_crossentropy',  # 'categorical_crossentropy',  # 交叉熵
         metrics=score_metrics  # 准确率,
     )
     return model
