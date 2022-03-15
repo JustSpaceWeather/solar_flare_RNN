@@ -35,9 +35,9 @@ class TVTFileConfig(object):
     """
 
     def __init__(self, p):
-        self.train_file = ''
-        self.valid_file = ''
-        self.test_file = ''
+        self.train_file = p + r'\data\TVT\train'
+        self.valid_file = p + r'\data\TVT\valid'
+        self.test_file = p + r'\data\TVT\test'
 
 
 class DetectConfig(object):

@@ -50,7 +50,7 @@ def load_train_or_test(filepath, class_1: list, class_2: list):
         end += 1
         if column.__eq__("SHRGT45"):  # 找到SHRGT45所在列
             break
-    data_list.append(csv.iloc[:, start - 1:end].values)
+    data_list.append(csv.iloc[:, start - 1:end].values)  # pandas取行操作
     classes = csv['CLASS'].copy()  # 获取csv中CLASS列的所有内容及其索引(从0开始)
     class_list = []
     class_1_num = 0
