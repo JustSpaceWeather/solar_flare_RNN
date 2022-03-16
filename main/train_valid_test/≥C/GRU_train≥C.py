@@ -70,8 +70,10 @@ if __name__ == '__main__':
                 loss_list.append(history.history['loss'])
                 val_loss_list.append(history.history['val_loss'])
                 print('======================================')
-            show_loss(loss_list, val_loss_list, config.epoch,
-                      file_path=model_save_path + '/GRU_C_' + str(time_steps) + '_best_' + str(i) + '.jpg')
+            show_loss(
+                loss_list, val_loss_list, config.epoch,
+                file_path=model_save_path + '/GRU_C_' + str(time_steps) + '_best_' + str(i) + '.jpg'
+            )
             best_TSS_list.append(best_TSS)
         # 全部训练完成后，打印所有权重的指标
         print('time_steps =', time_steps)
