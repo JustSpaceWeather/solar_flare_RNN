@@ -26,7 +26,7 @@ best_TSS_list = []  # 保存每个训练集的最好的TSS
 
 if __name__ == '__main__':
     model_save_path = p + '/weights/TVT/NN_best≥C_time_steps=' + str(time_steps)
-    for i in range(1, 10, 1):
+    for i in range(3, 4, 1):
         (x_train, y_train, train_weight_dir), (x_valid, y_valid, valid_weight_dir) = load_data_C(train_list[i],
                                                                                                  valid_list[i])
         model = get_NN_model(
