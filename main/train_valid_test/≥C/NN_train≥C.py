@@ -9,6 +9,7 @@ from util.load_data import load_data_list
 from util.load_data import load_data_C
 from util.set_seed import set_seed
 from util.score import show_score_and_save_weights
+from util.show_pic_util import show_loss
 from config.Config import TrainConfig
 from config.Config import TVTFileConfig
 
@@ -24,7 +25,8 @@ valid_list = load_data_list(file_config.valid_file)
 best_TSS_list = []  # 保存每个训练集的最好的TSS
 
 if __name__ == '__main__':
-    for i in range(10):
+    model_save_path = p + '/weights/TVT/NN_best≥C_time_steps=' + str(time_steps)
+    for i in range(1, 10, 1):
         (x_train, y_train, train_weight_dir), (x_valid, y_valid, valid_weight_dir) = load_data_C(train_list[i],
                                                                                                  valid_list[i])
         model = get_NN_model(
@@ -35,8 +37,10 @@ if __name__ == '__main__':
         )
         # 评价指标初始化
         best_TSS = float('-inf')
+        loss_list, val_loss_list = [], []
         for j in range(config.epoch):
-            print(train_list[i] + '\n' + valid_list[i] + '\nEpoch ' + str(j) + '/' + str(config.epoch))  # 打印当前训练的训练集和代数
+            print(train_list[i] + '\n' + valid_list[i] + '\nEpoch ' + str(j + 1) + '/' + str(
+                config.epoch))  # 打印当前训练的训练集和代数
             # 开始训练
             history = model.fit(
                 x_train, y_train,
@@ -49,14 +53,16 @@ if __name__ == '__main__':
             # 开始评价
             y_true = y_valid.argmax(axis=1)  # 真实的标签
             y_pred = model.predict(x_valid, batch_size=config.batch_size).argmax(axis=1)  # 将数据传入，得到预测的标签
-            model_save_path = p + '/weights/TVT/NN_best≥C_time_steps=' + str(time_steps)
             best_TSS = show_score_and_save_weights(  # 计算最好的TSS，并保存取得最好的TSS的权重
                 model=model,
                 best_TSS=best_TSS,
                 y_true=y_true, y_pred=y_pred,
                 filename=model_save_path + '/NN_C_best_' + str(i) + '.h5'
             )
+            loss_list.append(history.history['loss'])
+            val_loss_list.append(history.history['val_loss'])
             print('======================================')
+        show_loss(loss_list, val_loss_list, config.epoch, file_path=model_save_path + '/NN_C_best_' + str(i) + '.jpg')
         best_TSS_list.append(best_TSS)
     # 全部训练完成后，打印所有权重的指标
     for best_TSS in best_TSS_list:

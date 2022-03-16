@@ -1,13 +1,11 @@
 import matplotlib.pyplot as plt
 
 
-def show_loss(history, epoch):
-    # 迭代图像
-    loss = history.history['loss']
-    val_loss = history.history['val_loss']
+def show_loss(loss_list, val_loss_list, epoch, file_path):
+    plt.figure()
     epochs_range = range(epoch)
-    plt.plot(epochs_range, loss, label='Train Loss')
-    plt.plot(epochs_range, val_loss, label='Test Loss')
+    plt.plot(epochs_range, loss_list, label='Train Loss')
+    plt.plot(epochs_range, val_loss_list, label='Valid Loss')
     plt.legend(loc='upper right')
     plt.title('Train and Val Loss')
-    plt.show()
+    plt.savefig(file_path)
