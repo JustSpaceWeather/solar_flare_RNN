@@ -27,7 +27,7 @@ best_TSS_dir = {}
 if __name__ == '__main__':
     for time_steps in config.time_steps_list:
         best_TSS_list = []  # 保存每个训练集的最好的TSS
-        model_save_path = p + '/weights/TVT/LSTM_attention_best≥C/time_steps=' + str(time_steps)
+        model_save_path = p + '/weights/TVT/LSTM_attention_best≥M/time_steps=' + str(time_steps)
         for i in range(10):
             (x_train, y_train, train_weight_dir), (x_valid, y_valid, valid_weight_dir) = load_data_M(train_list[i],
                                                                                                      valid_list[i])

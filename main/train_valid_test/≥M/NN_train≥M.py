@@ -18,10 +18,8 @@ file_config = TVTFileConfig(p)
 config = TrainConfig()
 set_seed()
 time_steps = 1
-
 train_list = load_data_list(file_config.train_file)
 valid_list = load_data_list(file_config.valid_file)
-
 best_TSS_list = []  # 保存每个训练集的最好的TSS
 
 if __name__ == '__main__':
