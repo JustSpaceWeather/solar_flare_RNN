@@ -47,7 +47,7 @@ if __name__ == '__main__':
             loss_list, val_loss_list = [], []
             for j in range(config.epoch):
                 print("time_steps =", time_steps)
-                print(train_list[i] + '\n' + valid_list[i] + '\nEpoch ' + str(j+1) + '/' + str(
+                print(train_list[i] + '\n' + valid_list[i] + '\nEpoch ' + str(j + 1) + '/' + str(
                     config.epoch))  # 打印当前训练的训练集和代数
                 # 开始训练
                 history = model.fit(
