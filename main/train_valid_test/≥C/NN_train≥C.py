@@ -9,7 +9,7 @@ from util.load_data import load_data_list
 from util.load_data import load_data_C
 from util.set_seed import set_seed
 from util.score import show_score_and_save_weights
-from util.show_pic_util import show_loss
+from util.show_pic_util import save_loss
 from config.Config import TrainConfig
 from config.Config import TVTFileConfig
 
@@ -62,7 +62,7 @@ if __name__ == '__main__':
             loss_list.append(history.history['loss'])
             val_loss_list.append(history.history['val_loss'])
             print('======================================')
-        show_loss(loss_list, val_loss_list, config.epoch, file_path=model_save_path + '/NN_C_best_' + str(i) + '.jpg')
+        save_loss(loss_list, val_loss_list, config.epoch, model_save_path + '/NN_C_best_' + str(i) + '.jpg', False)
         best_TSS_list.append(best_TSS)
     # 全部训练完成后，打印所有权重的指标
     for best_TSS in best_TSS_list:

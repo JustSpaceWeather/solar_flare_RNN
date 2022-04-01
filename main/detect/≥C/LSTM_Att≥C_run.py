@@ -11,10 +11,10 @@ from model.LSTM_attention_model import get_LSTM_attention_model
 from util.scoreClass import Metric
 from util.load_data import Rectify
 from config.Config import DetectConfig
-from config.Config import TTFileConfig
+from config.Config import TVTFileConfig
 
 config = DetectConfig()
-file_config = TTFileConfig(p)
+file_config = TVTFileConfig(p)
 time_steps_list = config.time_steps_list
 test_list = load_data_list(file_config.test_file)
 score_metrics = config.score_metrics
@@ -40,7 +40,7 @@ if __name__ == '__main__':
             model = get_LSTM_attention_model(learning_rate=1e-4, dropout_rate=0.0, glorot_normal_seed=369,
                                              score_metrics=score_metrics, time_steps=time_steps)
             model.load_weights(
-                p + r'\weights\LSTM_attention_best≥C\time_steps=' + str(time_steps) + r'\LSTM_attention_C_' + str(
+                p + r'\weights\TVT\LSTM_attention_best≥C\time_steps=' + str(time_steps) + r'\LSTM_attention_C_' + str(
                     time_steps
                 ) + '_best_' + str(i) + '.h5'
             )

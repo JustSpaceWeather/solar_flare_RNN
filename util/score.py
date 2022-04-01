@@ -79,7 +79,7 @@ def BSS(y_true, y_pred):
     return 1 - BS / (K.mean(K.square(y_true - y_ave), axis=0)[1] + K.epsilon())
 
 
-def show_score_and_save_weights(model: Model, best_TSS, y_true, y_pred, filename):
+def show_score_and_save_weights(model: Model, best_TSS, y_true, y_pred, filename) -> float:
     """
     显示当前权重的得分，并且保存比best_TSS更好的TSS值的模型的权重
     :param model: 传入含有权重的模型

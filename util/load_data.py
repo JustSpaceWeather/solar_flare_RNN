@@ -126,6 +126,3 @@ def Rectify(_y, time_steps):
     _y = np.array(temp_y)
     return _y
 
-
-if __name__ == '__main__':
-    load_train_or_test_C()

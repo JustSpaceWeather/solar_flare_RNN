@@ -11,10 +11,10 @@ from model.GRU_attention_model import get_GRU_attention_model
 from util.scoreClass import Metric
 from util.load_data import Rectify
 from config.Config import DetectConfig
-from config.Config import TTFileConfig
+from config.Config import TVTFileConfig
 
 config = DetectConfig()
-file_config = TTFileConfig(p)
+file_config = TVTFileConfig(p)
 time_steps_list = config.time_steps_list
 test_list = load_data_list(file_config.test_file)
 score_metrics = config.score_metrics
@@ -45,7 +45,7 @@ if __name__ == '__main__':
                 time_steps=time_steps
             )
             model.load_weights(
-                p + r'\weights\GRU_attention_best≥M\time_steps=' + str(time_steps) + r'\GRU_attention_M_' + str(
+                p + r'\weights\TVT\GRU_attention_best≥M\time_steps=' + str(time_steps) + r'\GRU_attention_M_' + str(
                     time_steps
                 ) + '_best_' + str(i) + '.h5'
             )

@@ -11,10 +11,10 @@ from model.NN_model import get_NN_model
 from util.scoreClass import Metric
 from util.load_data import Rectify
 from config.Config import DetectConfig
-from config.Config import TTFileConfig
+from config.Config import TVTFileConfig
 
 config = DetectConfig()
-file_config = TTFileConfig(p)
+file_config = TVTFileConfig(p)
 time_steps_list = config.time_steps_list
 test_list = load_data_list(file_config.test_file)
 score_metrics = config.score_metrics
@@ -39,7 +39,7 @@ if __name__ == '__main__':
             # 载入模型
             model = get_NN_model(learning_rate=1e-4, dropout_rate=0.0, glorot_normal_seed=369,
                                  score_metrics=score_metrics)
-            model.load_weights(p + r'\weights\NN_best≥C_time_steps=1\NN_C_best_' + str(i) + '.h5')
+            model.load_weights(p + r'\weights\TVT\NN_best≥C_time_steps=1\NN_C_best_' + str(i) + '.h5')
             # 根据时间步修改测试集shape
             x_test_time_step = Rectify(x_test, time_steps)
             y_test_time_step = Rectify(y_test, time_steps)
@@ -56,12 +56,12 @@ if __name__ == '__main__':
             # print("TSS:", metric.TSS())
             # print("HSS:", metric.HSS())
             # print("FAR:", metric.FAR())
-            # print(metric.Recall())
-            # print(metric.Precision())
-            # print(metric.Accuracy())
-            # print(metric.TSS())
-            # print(metric.HSS())
-            # print(metric.FAR())
+            print(metric.Recall())
+            print(metric.Precision())
+            print(metric.Accuracy())
+            print(metric.TSS())
+            print(metric.HSS())
+            print(metric.FAR())
             data_Recall.extend(metric.Recall())
             data_Precision.extend(metric.Precision())
             data_Accuracy.extend(metric.Accuracy())
@@ -76,7 +76,7 @@ if __name__ == '__main__':
             all_metric["HSS"] += metric.HSS()
             all_metric["FAR"] += metric.FAR()
             # print('------------------------------------------')
-        print(all_matrix)
+        # print(all_matrix)
         # for index in all_metric:
         #     print(index, np.array(all_metric[index]) / all_nums)
         # print("\n")
@@ -100,7 +100,7 @@ if __name__ == '__main__':
         # print("FAR mean:", data_FAR[:, 0].mean(), data_FAR[:, 1].mean())
         # print("FAR std:", data_FAR[:, 0].std(), data_FAR[:, 1].std())
 
-        print(time_steps)
+        # print(time_steps)
         print(data_Recall[:, 0].mean(), data_Recall[:, 1].mean())
         print(data_Recall[:, 0].std(), data_Recall[:, 1].std())
         print(data_TSS[:, 0].mean(), data_TSS[:, 1].mean())

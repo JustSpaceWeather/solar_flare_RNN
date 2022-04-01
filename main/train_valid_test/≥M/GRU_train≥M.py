@@ -10,7 +10,7 @@ from util.load_data import load_data_M
 from util.load_data import Rectify
 from util.set_seed import set_seed
 from util.score import show_score_and_save_weights
-from util.show_pic_util import show_loss
+from util.show_pic_util import save_loss
 from config.Config import TrainConfig
 from config.Config import TVTFileConfig
 
@@ -26,6 +26,7 @@ best_TSS_dir = {}
 
 if __name__ == '__main__':
     for time_steps in [60, 120]:  # config.time_steps_list: 30, 40, 60, 120
+        is_new = True
         best_TSS_list = []  # 保存每个训练集的最好的TSS
         model_save_path = p + '/weights/TVT/GRU_best≥M/time_steps=' + str(time_steps)
         for i in range(10):
@@ -70,10 +71,12 @@ if __name__ == '__main__':
                 loss_list.append(history.history['loss'])
                 val_loss_list.append(history.history['val_loss'])
                 print('======================================')
-            show_loss(
+            save_loss(
                 loss_list, val_loss_list, config.epoch,
-                file_path=model_save_path + '/GRU_M_' + str(time_steps) + '_best_' + str(i) + '.jpg'
+                model_save_path + '/GRU_M_' + str(time_steps) + '_best_' + str(i) + '.jpg',
+                is_new
             )
+            is_new = False
             best_TSS_list.append(best_TSS)
         # 全部训练完成后，打印所有权重的指标
         print('time_steps =', time_steps)

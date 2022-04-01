@@ -41,5 +41,5 @@ class TVTFileConfig(object):
 
 class DetectConfig(object):
     def __init__(self):
-        self.time_steps_list = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]  #
+        self.time_steps_list = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]  # 1, 10, 12,    15, 20, 24,   30, 40, 60, 120
         self.score_metrics = []
