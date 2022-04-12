@@ -68,7 +68,7 @@ if __name__ == '__main__':
                 print('======================================')
             save_loss(  # 保存训练时损失函数的变化图象
                 loss_list, val_loss_list, config.epoch,
-                model_save_path + '/Bi_GRU_attention_C_' + str(time_steps) + '_best_' + str(i) + '.jpg',
+                model_save_path + '/Bi_LSTM_C_' + str(time_steps) + '_best_' + str(i) + '.jpg',
                 is_new
             )
             is_new = False
