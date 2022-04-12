@@ -27,7 +27,7 @@ best_TSS_dir = {}
 if __name__ == '__main__':
     for time_steps in config.time_steps_list:
         is_new = True
-        model_save_path = p + '/weights/Bi_LSTM_attention_best≥C/time_steps=' + str(time_steps)
+        model_save_path = p + '/weights/TT/Bi_LSTM_attention2_best≥C/time_steps=' + str(time_steps)
         best_TSS_list = []  # 保存每个训练集的最好的TSS
         for i in range(10):
             (x_train, y_train, train_weight_dir), (x_test, y_test, test_weight_dir) = load_data_C(train_list[i],
@@ -61,7 +61,7 @@ if __name__ == '__main__':
                     model=model,
                     best_TSS=best_TSS,
                     y_true=y_true, y_pred=y_pred,
-                    filename=model_save_path + '/Bi_LSTM_attention_C_' + str(time_steps) + '_best_' + str(
+                    filename=model_save_path + '/Bi_LSTM_attention2_C_' + str(time_steps) + '_best_' + str(
                         i) + '.h5'
                 )
                 loss_list.append(history.history['loss'])
@@ -69,7 +69,7 @@ if __name__ == '__main__':
                 print('======================================')
             save_loss(  # 保存训练时损失函数的变化图象
                 loss_list, val_loss_list, config.epoch,
-                model_save_path + '/Bi_GRU_attention_C_' + str(time_steps) + '_best_' + str(i) + '.jpg',
+                model_save_path + '/Bi_GRU_attention2_C_' + str(time_steps) + '_best_' + str(i) + '.jpg',
                 is_new
             )
             is_new = False
