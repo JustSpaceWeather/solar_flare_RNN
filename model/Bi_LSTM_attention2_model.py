@@ -3,7 +3,7 @@ from keras.models import Sequential
 from keras.layers import InputLayer, Bidirectional, LSTM, Dense, Dropout, BatchNormalization, Activation
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
-from layer.attention import Attention
+from layer.attention2 import Attention
 
 
 def get_Bi_LSTM_attention_model(time_steps,
@@ -35,7 +35,7 @@ def get_Bi_LSTM_attention_model(time_steps,
         Dropout(dropout_rate),
         BatchNormalization(),
         # 第二层Attention
-        Attention(step_dim=time_steps),
+        Attention(),
         # 第三层
         Dense(
             units=128,
