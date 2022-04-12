@@ -64,6 +64,8 @@ if __name__ == '__main__':
                     y_true=y_true, y_pred=y_pred,
                     filename=model_save_path + '/LSTM_attention_M_' + str(time_steps) + '_best_' + str(i) + '.h5'
                 )
+                loss_list.append(history.history['loss'])
+                val_loss_list.append(history.history['val_loss'])
                 print('======================================')
             save_loss(  # 保存训练时损失函数的变化图象
                 loss_list, val_loss_list, config.epoch,

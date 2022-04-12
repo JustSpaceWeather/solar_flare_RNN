@@ -59,6 +59,7 @@ if __name__ == '__main__':
                 y_true=y_true, y_pred=y_pred,
                 filename=model_save_path + '/NN_M_best_' + str(i) + '.h5'
             )
+            loss_list.append(history.history['loss'])
             val_loss_list.append(history.history['val_loss'])
             print('======================================')
         save_loss(loss_list, val_loss_list, config.epoch, model_save_path + '/NN_M_best_' + str(i) + '.jpg', False)
