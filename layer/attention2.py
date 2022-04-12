@@ -30,7 +30,6 @@ class Attention(Layer):
             self.attention_output = Concatenate(name='attention_output')
             self.attention_vector = Dense(self.units, use_bias=False, activation='tanh', name='attention_vector')
         if not debug_flag:
-            # debug: the call to build() is done in call().
             super(Attention, self).build(input_shape)
 
     def compute_output_shape(self, input_shape):
@@ -53,17 +52,10 @@ class Attention(Layer):
         """
         if debug_flag:
             self.build(inputs.shape)
-        # Inside dense layer
-        #              hidden_states            dot               W            =>           score_first_part
-        # (batch_size, time_steps, hidden_size) dot (hidden_size, hidden_size) => (batch_size, time_steps, hidden_size)
-        # W is the trainable weight matrix of attention Luong's multiplicative style score
         score_first_part = self.attention_score_vec(inputs)
-        #            score_first_part           dot        last_hidden_state     => attention_weights
-        # (batch_size, time_steps, hidden_size) dot   (batch_size, hidden_size)  => (batch_size, time_steps)
         h_t = self.h_t(inputs)
         score = self.attention_score([h_t, score_first_part])
         attention_weights = self.attention_weight(score)
-        # (batch_size, time_steps, hidden_size) dot (batch_size, time_steps) => (batch_size, hidden_size)
         context_vector = self.context_vector([inputs, attention_weights])
         pre_activation = self.attention_output([context_vector, h_t])
         attention_vector = self.attention_vector(pre_activation)
