@@ -7,7 +7,7 @@ from tensorflow.keras.initializers import glorot_normal
 from layer.attention2 import Attention
 
 
-def get_GRU_attention2_model(time_steps,
+def get_GRU_attention_model(time_steps,
                              learning_rate: float,
                              dropout_rate: float,
                              seed: int,
