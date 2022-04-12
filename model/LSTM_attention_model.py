@@ -25,7 +25,7 @@ def get_LSTM_attention_model(time_steps,
         InputLayer(input_shape=(time_steps, 10)),
         # 第一层LSTM
         LSTM(
-            units=128,
+            units=256,
             kernel_initializer=glorot_normal(glorot_normal_seed),
             activation='tanh',
             return_sequences=True

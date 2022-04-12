@@ -31,13 +31,8 @@ if __name__ == '__main__':
             all_nums += 1
             x_test, y_test, test_weight_dir = load_train_or_test_M(file_config.test_file + '/test_' + str(i) + '.csv')
             # 载入模型
-            model = get_LSTM_model(
-                learning_rate=1e-4,
-                dropout_rate=0.0,
-                glorot_normal_seed=369,
-                score_metrics=score_metrics,
-                time_steps=120
-            )
+            model = get_LSTM_model(time_steps=120, learning_rate=1e-4, dropout_rate=0.0, seed=369,
+                                   score_metrics=score_metrics)
             model.load_weights(path + str(i) + '.h5')
             x_test_time_step = x_test.reshape(-1, 120, 10)
             y_test_time_step = Rectify(y_test, 120)

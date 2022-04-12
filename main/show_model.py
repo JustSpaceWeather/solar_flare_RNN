@@ -22,19 +22,11 @@ def save_show_model(model, file_name):
 
 if __name__ == '__main__':
     config = TrainConfig()
-    NN_model = NN_model.get_NN_model(
-        learning_rate=config.learning_rate,
-        dropout_rate=config.dropout_rate,
-        glorot_normal_seed=config.glorot_normal_seed,
-        score_metrics=config.score_metrics
-    )
-    LSTM_model = LSTM_model.get_LSTM_model(
-        time_steps=120,
-        learning_rate=config.learning_rate,
-        dropout_rate=config.dropout_rate,
-        glorot_normal_seed=config.glorot_normal_seed,
-        score_metrics=config.score_metrics
-    )
+    NN_model = NN_model.get_NN_model(learning_rate=config.learning_rate, dropout_rate=config.dropout_rate,
+                                     seed=config.glorot_normal_seed, score_metrics=config.score_metrics)
+    LSTM_model = LSTM_model.get_LSTM_model(time_steps=120, learning_rate=config.learning_rate,
+                                           dropout_rate=config.dropout_rate, seed=config.glorot_normal_seed,
+                                           score_metrics=config.score_metrics)
     GRU_model = GRU_model.get_GRU_model(
         time_steps=120,
         learning_rate=config.learning_rate,

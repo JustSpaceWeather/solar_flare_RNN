@@ -5,11 +5,11 @@ from keras.optimizers import Adam
 from keras.initializers import glorot_normal
 
 
-def get_NN_model(learning_rate: float, dropout_rate: float, glorot_normal_seed: int, score_metrics: list):
+def get_NN_model(learning_rate: float, dropout_rate: float, seed: int, score_metrics: list):
     """
     :param learning_rate: 学习率
     :param dropout_rate: 神经元失活率
-    :param glorot_normal_seed: Glorot正态分布初始化方法随机数种子
+    :param seed: Glorot正态分布初始化方法随机数种子
     :param score_metrics: 评价指标
 
     使用NN算法，三层全连接层，前两层使用relu激活函数，最后一层为输出层，使用softmax函数
@@ -24,24 +24,24 @@ def get_NN_model(learning_rate: float, dropout_rate: float, glorot_normal_seed: 
         # 第一层
         Dense(
             units=128,
-            kernel_initializer=glorot_normal(glorot_normal_seed)
+            kernel_initializer=glorot_normal(seed)
         ),
-        Dropout(dropout_rate),
+        Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
         Activation('relu'),
         # 第二层
         Dense(
             units=64,
-            kernel_initializer=glorot_normal(glorot_normal_seed)
+            kernel_initializer=glorot_normal(seed)
         ),
-        Dropout(dropout_rate),
+        Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
         Activation('relu'),
         # 第三层输出层
         Dense(
             units=2,
             activation='softmax',
-            kernel_initializer=glorot_normal(glorot_normal_seed)
+            kernel_initializer=glorot_normal(seed)
         ),
     ])
     adam = Adam(learning_rate)

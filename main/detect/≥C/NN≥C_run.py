@@ -37,8 +37,7 @@ if __name__ == '__main__':
             all_nums += 1
             x_test, y_test, test_weight_dir = load_train_or_test_C(test_list[i])
             # 载入模型
-            model = get_NN_model(learning_rate=1e-4, dropout_rate=0.0, glorot_normal_seed=369,
-                                 score_metrics=score_metrics)
+            model = get_NN_model(learning_rate=1e-4, dropout_rate=0.0, seed=369, score_metrics=score_metrics)
             model.load_weights(p + r'\weights\TVT\NN_best≥C_time_steps=1\NN_C_best_' + str(i) + '.h5')
             # 根据时间步修改测试集shape
             x_test_time_step = Rectify(x_test, time_steps)

@@ -26,7 +26,7 @@ def get_Bi_LSTM_attention_model(time_steps,
         # 第一层Bi-LSTM
         Bidirectional(
             LSTM(
-                units=128,
+                units=256,
                 kernel_initializer=glorot_normal(glorot_normal_seed),
                 activation='tanh',
                 return_sequences=True

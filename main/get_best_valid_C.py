@@ -13,13 +13,9 @@ from util.load_data import Rectify
 if __name__ == '__main__':
     for n in range(1, 5, 1):
         train_config = TrainConfig()
-        model = get_LSTM_model(
-            time_steps=120,
-            learning_rate=train_config.learning_rate,
-            dropout_rate=train_config.dropout_rate,
-            glorot_normal_seed=train_config.glorot_normal_seed,
-            score_metrics=train_config.score_metrics
-        )
+        model = get_LSTM_model(time_steps=120, learning_rate=train_config.learning_rate,
+                               dropout_rate=train_config.dropout_rate, seed=train_config.glorot_normal_seed,
+                               score_metrics=train_config.score_metrics)
         for i in range(1, 2, 1):
             train_path = 'D:/data/' + str(n) + '/train_'
             valid_path = 'D:/data/' + str(n) + '/valid_'

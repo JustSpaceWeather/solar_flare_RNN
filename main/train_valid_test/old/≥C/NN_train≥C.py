@@ -29,12 +29,8 @@ if __name__ == '__main__':
     for i in range(10):
         (x_train, y_train, train_weight_dir), (x_valid, y_valid, valid_weight_dir) = load_data_C(train_list[i],
                                                                                                  valid_list[i])
-        model = get_NN_model(
-            learning_rate=config.learning_rate,
-            dropout_rate=config.dropout_rate,
-            glorot_normal_seed=config.glorot_normal_seed,
-            score_metrics=config.score_metrics
-        )
+        model = get_NN_model(learning_rate=config.learning_rate, dropout_rate=config.dropout_rate,
+                             seed=config.glorot_normal_seed, score_metrics=config.score_metrics)
         # 评价指标初始化
         best_TSS = float('-inf')
         loss_list, val_loss_list = [], []

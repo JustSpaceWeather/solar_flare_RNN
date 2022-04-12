@@ -25,7 +25,7 @@ def get_Bi_GRU_model(time_steps: int,
         # 第一层Bi-GRU
         Bidirectional(
             GRU(
-                units=128,
+                units=256,
                 kernel_initializer=glorot_normal(glorot_normal_seed),
                 activation='tanh'
             ),
