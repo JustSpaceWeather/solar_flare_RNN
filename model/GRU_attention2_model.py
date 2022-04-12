@@ -5,6 +5,7 @@ from tensorflow.keras.layers import InputLayer, GRU, Dense, Dropout, BatchNormal
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.initializers import glorot_normal
 from layer.attention2 import Attention
+from common import common_NN
 
 
 def get_GRU_attention2_model(time_steps,
@@ -22,46 +23,22 @@ def get_GRU_attention2_model(time_steps,
     :return: 编译好的 GRU 多对一注意力机制 模型
     """
     keras.initializers.he_normal(521)
-    model = Sequential([
-        InputLayer(input_shape=(time_steps, 10)),
-        # 第一层LSTM
-        GRU(
-            units=256,
-            kernel_initializer=glorot_normal(seed),
-            activation='tanh',
-            return_sequences=True,
-            bias_initializer=tf.zeros_initializer()
-        ),
-        Dropout(dropout_rate, seed=seed),
-        BatchNormalization(),
-        # 第二层Attention
-        Attention(),
-        # 第三层
-        Dense(
-            units=128,
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-        Dropout(dropout_rate, seed=seed),
-        BatchNormalization(),
-        Activation('relu'),
-        # 第四层
-        Dense(
-            units=64,
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-        Dropout(dropout_rate, seed=seed),
-        BatchNormalization(),
-        Activation('relu'),
-        # 第五层输出层
-        Dense(
-            units=2,
-            activation='softmax',
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-    ])
+    model = Sequential(
+        [
+            InputLayer(input_shape=(time_steps, 10)),
+            # 第一层LSTM
+            GRU(
+                units=256,
+                kernel_initializer=glorot_normal(seed),
+                activation='tanh',
+                return_sequences=True,
+                bias_initializer=tf.zeros_initializer()
+            ),
+            Dropout(dropout_rate, seed=seed),
+            BatchNormalization(),
+            # 第二层Attention
+            Attention()
+        ].append(common_NN(dropout_rate, seed)))
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,

@@ -4,6 +4,7 @@ from keras.models import Sequential
 from keras.layers import InputLayer, Dense, Dropout, BatchNormalization, Activation
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
+from common import common_NN
 
 
 def get_NN_model(learning_rate: float, dropout_rate: float, seed: int, score_metrics: list):
@@ -20,34 +21,7 @@ def get_NN_model(learning_rate: float, dropout_rate: float, seed: int, score_met
     :return: 编译好的NN模型
     """
     keras.initializers.he_normal(521)
-    model = Sequential([
-        InputLayer(input_shape=(10,)),
-        # 第一层
-        Dense(
-            units=128,
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-        Dropout(dropout_rate, seed=seed),
-        BatchNormalization(),
-        Activation('relu'),
-        # 第二层
-        Dense(
-            units=64,
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-        Dropout(dropout_rate, seed=seed),
-        BatchNormalization(),
-        Activation('relu'),
-        # 第三层输出层
-        Dense(
-            units=2,
-            activation='softmax',
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-    ])
+    model = Sequential([InputLayer(input_shape=(10,))].append(common_NN(dropout_rate, seed)))
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,

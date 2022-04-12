@@ -4,6 +4,7 @@ from keras.models import Sequential
 from keras.layers import InputLayer, LSTM, Dense, Dropout, BatchNormalization, Activation
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
+from common import common_NN
 
 
 def get_LSTM_model(time_steps, learning_rate: float, dropout_rate: float, seed: int, score_metrics: list):
@@ -28,32 +29,7 @@ def get_LSTM_model(time_steps, learning_rate: float, dropout_rate: float, seed: 
         ),
         Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
-        # 第二层
-        Dense(
-            units=128,
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-        Dropout(dropout_rate, seed=seed),
-        BatchNormalization(),
-        Activation('relu'),
-        # 第三层
-        Dense(
-            units=64,
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-        Dropout(dropout_rate, seed=seed),
-        BatchNormalization(),
-        Activation('relu'),
-        # 第四层输出层
-        Dense(
-            units=2,
-            activation='softmax',
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-    ])
+    ].append(common_NN(dropout_rate, seed)))
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,

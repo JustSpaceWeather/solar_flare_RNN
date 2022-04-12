@@ -5,6 +5,7 @@ from keras.layers import InputLayer, LSTM, Dense, Dropout, BatchNormalization, A
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
 from layer.attention import Attention
+from common import common_NN
 
 
 def get_LSTM_attention_model(time_steps,
@@ -35,33 +36,8 @@ def get_LSTM_attention_model(time_steps,
         Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
         # 第二层Attention
-        Attention(step_dim=time_steps),
-        # 第三层
-        Dense(
-            units=128,
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-        Dropout(dropout_rate, seed=seed),
-        BatchNormalization(),
-        Activation('relu'),
-        # 第四层
-        Dense(
-            units=64,
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-        Dropout(dropout_rate, seed=seed),
-        BatchNormalization(),
-        Activation('relu'),
-        # 第五层输出层
-        Dense(
-            units=2,
-            activation='softmax',
-            kernel_initializer=glorot_normal(seed),
-            bias_initializer=tf.zeros_initializer()
-        ),
-    ])
+        Attention(step_dim=time_steps)
+    ].append(common_NN(dropout_rate, seed)))
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,
