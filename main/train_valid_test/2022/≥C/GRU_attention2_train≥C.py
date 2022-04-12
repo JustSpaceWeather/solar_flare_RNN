@@ -4,7 +4,7 @@ import os
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.append(p)
 
-from model.GRU_attention_model import get_GRU_attention_model
+from model.GRU_attention2_model import get_GRU_attention_model
 from util.load_data import load_data_list
 from util.load_data import load_data_C
 from util.load_data import Rectify
@@ -12,10 +12,10 @@ from util.set_seed import set_seed
 from util.score import show_score_and_save_weights
 from util.show_pic_util import save_loss
 from config.Config import TrainConfig
-from config.Config import File2018Config
+from config.Config import File2022Config
 
 # 训练参数
-file_config = File2018Config(p)
+file_config = File2022Config(p)
 config = TrainConfig()
 set_seed()
 
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     for time_steps in config.time_steps_list:
         is_new = True
         best_TSS_list = []  # 保存每个训练集的最好的TSS
-        model_save_path = p + '/weights/2018/GRU_attention_best≥C/time_steps=' + str(time_steps)
+        model_save_path = p + '/weights/2022/GRU_attention_best≥C/time_steps=' + str(time_steps)
         for i in range(10):
             (x_train, y_train, train_weight_dir), (x_valid, y_valid, valid_weight_dir) = load_data_C(train_list[i],
                                                                                                      valid_list[i])
