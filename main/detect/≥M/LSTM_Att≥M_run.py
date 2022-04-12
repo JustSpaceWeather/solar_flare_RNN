@@ -37,13 +37,8 @@ if __name__ == '__main__':
             all_nums += 1
             x_test, y_test, test_weight_dir = load_train_or_test_M(test_list[i])
             # 载入模型
-            model = get_LSTM_attention_model(
-                learning_rate=1e-4,
-                dropout_rate=0.0,
-                glorot_normal_seed=369,
-                score_metrics=score_metrics,
-                time_steps=time_steps
-            )
+            model = get_LSTM_attention_model(time_steps=time_steps, learning_rate=1e-4, dropout_rate=0.0, seed=369,
+                                             score_metrics=score_metrics)
             model.load_weights(
                 p + r'\weights\TVT\LSTM_attention_best≥M\time_steps=' + str(time_steps) + r'\LSTM_attention_M_' + str(
                     time_steps

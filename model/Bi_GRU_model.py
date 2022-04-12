@@ -8,14 +8,14 @@ from keras.initializers import glorot_normal
 def get_Bi_GRU_model(time_steps: int,
                      learning_rate: float,
                      dropout_rate: float,
-                     glorot_normal_seed: int,
+                     seed: int,
                      score_metrics: list):
     """
     获得编译好的双向GRU模型
     :param time_steps: 时间步
     :param learning_rate: 学习率
     :param dropout_rate: 神经元失活率
-    :param glorot_normal_seed: Glorot正态分布初始化方法随机数种子
+    :param seed: 随机数种子  Glorot正态分布初始化方法和Dropout
     :param score_metrics: 评价指标
     :return: 编译好的双向GRU模型
     """
@@ -26,33 +26,33 @@ def get_Bi_GRU_model(time_steps: int,
         Bidirectional(
             GRU(
                 units=256,
-                kernel_initializer=glorot_normal(glorot_normal_seed),
+                kernel_initializer=glorot_normal(seed),
                 activation='tanh'
             ),
         ),
-        Dropout(dropout_rate),
+        Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
         # 第二层
         Dense(
             units=128,
-            kernel_initializer=glorot_normal(glorot_normal_seed)
+            kernel_initializer=glorot_normal(seed)
         ),
-        Dropout(dropout_rate),
+        Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
         Activation('relu'),
         # 第三层
         Dense(
             units=64,
-            kernel_initializer=glorot_normal(glorot_normal_seed)
+            kernel_initializer=glorot_normal(seed)
         ),
-        Dropout(dropout_rate),
+        Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
         Activation('relu'),
         # 第四层输出层
         Dense(
             units=2,
             activation='softmax',
-            kernel_initializer=glorot_normal(glorot_normal_seed)
+            kernel_initializer=glorot_normal(seed)
         ),
     ])
     adam = Adam(learning_rate)

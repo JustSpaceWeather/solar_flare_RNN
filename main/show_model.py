@@ -27,55 +27,35 @@ if __name__ == '__main__':
     LSTM_model = LSTM_model.get_LSTM_model(time_steps=120, learning_rate=config.learning_rate,
                                            dropout_rate=config.dropout_rate, seed=config.glorot_normal_seed,
                                            score_metrics=config.score_metrics)
-    GRU_model = GRU_model.get_GRU_model(
-        time_steps=120,
-        learning_rate=config.learning_rate,
-        dropout_rate=config.dropout_rate,
-        glorot_normal_seed=config.glorot_normal_seed,
-        score_metrics=config.score_metrics
-    )
-    Bi_LSTM_model = Bi_LSTM_model.get_Bi_LSTM_model(
-        time_steps=120,
-        learning_rate=config.learning_rate,
-        dropout_rate=config.dropout_rate,
-        glorot_normal_seed=config.glorot_normal_seed,
-        score_metrics=config.score_metrics
-    )
-    Bi_GRU_model = Bi_GRU_model.get_Bi_GRU_model(
-        time_steps=120,
-        learning_rate=config.learning_rate,
-        dropout_rate=config.dropout_rate,
-        glorot_normal_seed=config.glorot_normal_seed,
-        score_metrics=config.score_metrics
-    )
-    LSTM_attention_model = LSTM_attention_model.get_LSTM_attention_model(
-        time_steps=120,
-        learning_rate=config.learning_rate,
-        dropout_rate=config.dropout_rate,
-        glorot_normal_seed=config.glorot_normal_seed,
-        score_metrics=config.score_metrics
-    )
-    GRU_attention_model = GRU_attention_model.get_GRU_attention_model(
-        time_steps=120,
-        learning_rate=config.learning_rate,
-        dropout_rate=config.dropout_rate,
-        glorot_normal_seed=config.glorot_normal_seed,
-        score_metrics=config.score_metrics
-    )
-    Bi_LSTM_attention_model = Bi_LSTM_attention_model.get_Bi_LSTM_attention_model(
-        time_steps=120,
-        learning_rate=config.learning_rate,
-        dropout_rate=config.dropout_rate,
-        glorot_normal_seed=config.glorot_normal_seed,
-        score_metrics=config.score_metrics
-    )
-    Bi_GRU_attention_model = Bi_GRU_attention_model.get_Bi_GRU_attention_model(
-        time_steps=120,
-        learning_rate=config.learning_rate,
-        dropout_rate=config.dropout_rate,
-        glorot_normal_seed=config.glorot_normal_seed,
-        score_metrics=config.score_metrics
-    )
+    GRU_model = GRU_model.get_GRU_model(time_steps=120, learning_rate=config.learning_rate,
+                                        dropout_rate=config.dropout_rate, seed=config.glorot_normal_seed,
+                                        score_metrics=config.score_metrics)
+    Bi_LSTM_model = Bi_LSTM_model.get_Bi_LSTM_model(time_steps=120, learning_rate=config.learning_rate,
+                                                    dropout_rate=config.dropout_rate, seed=config.glorot_normal_seed,
+                                                    score_metrics=config.score_metrics)
+    Bi_GRU_model = Bi_GRU_model.get_Bi_GRU_model(time_steps=120, learning_rate=config.learning_rate,
+                                                 dropout_rate=config.dropout_rate, seed=config.glorot_normal_seed,
+                                                 score_metrics=config.score_metrics)
+    LSTM_attention_model = LSTM_attention_model.get_LSTM_attention_model(time_steps=120,
+                                                                         learning_rate=config.learning_rate,
+                                                                         dropout_rate=config.dropout_rate,
+                                                                         seed=config.glorot_normal_seed,
+                                                                         score_metrics=config.score_metrics)
+    GRU_attention_model = GRU_attention_model.get_GRU_attention_model(time_steps=120,
+                                                                      learning_rate=config.learning_rate,
+                                                                      dropout_rate=config.dropout_rate,
+                                                                      seed=config.glorot_normal_seed,
+                                                                      score_metrics=config.score_metrics)
+    Bi_LSTM_attention_model = Bi_LSTM_attention_model.get_Bi_LSTM_attention_model(time_steps=120,
+                                                                                  learning_rate=config.learning_rate,
+                                                                                  dropout_rate=config.dropout_rate,
+                                                                                  seed=config.glorot_normal_seed,
+                                                                                  score_metrics=config.score_metrics)
+    Bi_GRU_attention_model = Bi_GRU_attention_model.get_Bi_GRU_attention_model(time_steps=120,
+                                                                               learning_rate=config.learning_rate,
+                                                                               dropout_rate=config.dropout_rate,
+                                                                               seed=config.glorot_normal_seed,
+                                                                               score_metrics=config.score_metrics)
     save_show_model(NN_model, 'NN_model.png')
     save_show_model(LSTM_model, 'LSTM_model.png')
     save_show_model(GRU_model, 'GRU_model.png')

@@ -9,7 +9,7 @@ def get_NN_model(learning_rate: float, dropout_rate: float, seed: int, score_met
     """
     :param learning_rate: 学习率
     :param dropout_rate: 神经元失活率
-    :param seed: Glorot正态分布初始化方法随机数种子
+    :param seed: seed: 随机数种子  Glorot正态分布初始化方法和Dropout
     :param score_metrics: 评价指标
 
     使用NN算法，三层全连接层，前两层使用relu激活函数，最后一层为输出层，使用softmax函数

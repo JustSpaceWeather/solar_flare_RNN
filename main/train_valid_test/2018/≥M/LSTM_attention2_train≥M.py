@@ -37,8 +37,7 @@ if __name__ == '__main__':
             y_train = Rectify(y_train, time_steps)
             y_valid = Rectify(y_valid, time_steps)
             model = get_LSTM_attention_model(time_steps=time_steps, learning_rate=config.learning_rate,
-                                             dropout_rate=config.dropout_rate,
-                                             glorot_normal_seed=config.glorot_normal_seed,
+                                             dropout_rate=config.dropout_rate, seed=config.glorot_normal_seed,
                                              score_metrics=config.score_metrics)
             # 评价指标初始化
             best_TSS = float('-inf')
