@@ -5,7 +5,7 @@ from keras.layers import InputLayer, Bidirectional, LSTM, Dense, Dropout, BatchN
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
 from layer.attention import Attention
-from common import common_NN
+from model.common import common_NN
 
 
 def get_Bi_LSTM_attention_model(time_steps,
@@ -40,7 +40,7 @@ def get_Bi_LSTM_attention_model(time_steps,
             BatchNormalization(),
             # 第二层Attention
             Attention(step_dim=time_steps),
-        ].append(common_NN(dropout_rate, seed)))
+        ] + common_NN(dropout_rate, seed))
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,

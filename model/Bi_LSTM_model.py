@@ -4,7 +4,7 @@ from keras.models import Sequential
 from keras.layers import InputLayer, Bidirectional, LSTM, Dense, Dropout, BatchNormalization, Activation
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
-from common import common_NN
+from model.common import common_NN
 
 
 def get_Bi_LSTM_model(time_steps,
@@ -36,7 +36,7 @@ def get_Bi_LSTM_model(time_steps,
             ),
             Dropout(dropout_rate, seed=seed),
             BatchNormalization(),
-        ].append(common_NN(dropout_rate, seed)))
+        ] + common_NN(dropout_rate, seed))
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,
