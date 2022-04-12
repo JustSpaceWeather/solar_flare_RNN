@@ -25,7 +25,7 @@ valid_list = load_data_list(file_config.valid_file)
 best_TSS_dir = {}
 
 if __name__ == '__main__':
-    for time_steps in [60, 120]:  # config.time_steps_list: 30, 40, 60, 120
+    for time_steps in [60, 120]:  # seed_config.time_steps_list: 30, 40, 60, 120
         is_new = True
         best_TSS_list = []  # 保存每个训练集的最好的TSS
         model_save_path = p + '/weights/TVT/GRU_best≥M/time_steps=' + str(time_steps)

@@ -63,7 +63,7 @@ class Attention(Layer):
 
     def get_config(self):
         """
-        Returns the config of a the layer. This is used for saving and loading from a model
+        Returns the seed_config of a the layer. This is used for saving and loading from a model
         :return: python dictionary with specs to rebuild layer
         """
         config = super(Attention, self).get_config()

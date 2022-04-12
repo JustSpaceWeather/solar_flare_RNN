@@ -44,7 +44,8 @@ if __name__ == '__main__':
             loss_list, val_loss_list = [], []
             for j in range(config.epoch):
                 print("time_steps =", time_steps)
-                print(train_list[i] + '\nEpoch ' + str(j) + '/' + str(config.epoch))  # 打印当前训练的训练集和代数
+                print(train_list[i] + '\n' + test_list[i] + '\nEpoch ' + str(j + 1) + '/' + str(
+                    config.epoch))  # 打印当前训练的训练集和代数
                 # 开始训练
                 history = model.fit(
                     x_train, y_train,
@@ -63,6 +64,8 @@ if __name__ == '__main__':
                     y_true=y_true, y_pred=y_pred,
                     filename=model_save_path + '/LSTM_attention_C_' + str(time_steps) + '_best_' + str(i) + '.h5'
                 )
+                loss_list.append(history.history['loss'])
+                val_loss_list.append(history.history['val_loss'])
                 print('======================================')
             save_loss(  # 保存训练时损失函数的变化图象
                 loss_list, val_loss_list, config.epoch,

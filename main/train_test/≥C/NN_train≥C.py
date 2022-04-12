@@ -39,7 +39,8 @@ if __name__ == '__main__':
         best_TSS = float('-inf')
         loss_list, val_loss_list = [], []
         for j in range(config.epoch):
-            print(train_list[i] + '\nEpoch ' + str(j) + '/' + str(config.epoch))  # 打印当前训练的训练集和代数
+            print(train_list[i] + '\n' + test_list[i] + '\nEpoch ' + str(j + 1) + '/' + str(
+                config.epoch))  # 打印当前训练的训练集和代数
             # 开始训练
             history = model.fit(
                 x_train, y_train,
@@ -58,6 +59,7 @@ if __name__ == '__main__':
                 y_true=y_true, y_pred=y_pred,
                 filename=model_save_path + '/NN_C_best_' + str(i) + '.h5'
             )
+            loss_list.append(history.history['loss'])
             val_loss_list.append(history.history['val_loss'])
             print('======================================')
         save_loss(loss_list, val_loss_list, config.epoch, model_save_path + '/NN_C_best_' + str(i) + '.jpg', False)
