@@ -11,7 +11,7 @@ def get_Bi_GRU_model(time_steps: int,
                      glorot_normal_seed: int,
                      score_metrics: list):
     """
-    获得编译好的双向lstm模型
+    获得编译好的双向GRU模型
     :param time_steps: 时间步
     :param learning_rate: 学习率
     :param dropout_rate: 神经元失活率

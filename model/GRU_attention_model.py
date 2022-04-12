@@ -12,13 +12,13 @@ def get_GRU_attention_model(time_steps,
                             glorot_normal_seed: int,
                             score_metrics: list):
     """
-    获得编译好的lstmAtt模型
+    获得编译好的 GRU 前向传播注意力机制 模型
     :param time_steps: 时间步
     :param learning_rate: 学习率
     :param dropout_rate: 神经元失活率
     :param glorot_normal_seed: Glorot正态分布初始化方法随机数种子
     :param score_metrics: 评价指标
-    :return: 编译好的lstmAtt模型
+    :return: 编译好的 GRU 前向传播注意力机制 模型
     """
     keras.initializers.he_normal(521)
     model = Sequential([

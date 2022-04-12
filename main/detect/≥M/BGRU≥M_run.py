@@ -20,7 +20,7 @@ test_list = load_data_list(file_config.test_file)
 score_metrics = config.score_metrics
 
 if __name__ == '__main__':
-    for time_steps in time_steps_list:
+    for time_steps in [120]:  # time_steps_list:
         all_metric = {
             "Recall": [0, 0],
             "Precision": [0, 0],
