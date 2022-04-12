@@ -1,4 +1,5 @@
 import keras
+import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import InputLayer, Dense, Dropout, BatchNormalization, Activation
 from keras.optimizers import Adam
@@ -24,7 +25,8 @@ def get_NN_model(learning_rate: float, dropout_rate: float, seed: int, score_met
         # 第一层
         Dense(
             units=128,
-            kernel_initializer=glorot_normal(seed)
+            kernel_initializer=glorot_normal(seed),
+            bias_initializer=tf.zeros_initializer()
         ),
         Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
@@ -32,7 +34,8 @@ def get_NN_model(learning_rate: float, dropout_rate: float, seed: int, score_met
         # 第二层
         Dense(
             units=64,
-            kernel_initializer=glorot_normal(seed)
+            kernel_initializer=glorot_normal(seed),
+            bias_initializer=tf.zeros_initializer()
         ),
         Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
@@ -41,7 +44,8 @@ def get_NN_model(learning_rate: float, dropout_rate: float, seed: int, score_met
         Dense(
             units=2,
             activation='softmax',
-            kernel_initializer=glorot_normal(seed)
+            kernel_initializer=glorot_normal(seed),
+            bias_initializer=tf.zeros_initializer()
         ),
     ])
     adam = Adam(learning_rate)

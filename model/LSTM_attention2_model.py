@@ -1,3 +1,4 @@
+import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import InputLayer, LSTM, Dense, Dropout, BatchNormalization, Activation
@@ -28,7 +29,8 @@ def get_LSTM_attention_model(time_steps,
             units=256,
             kernel_initializer=glorot_normal(seed),
             activation='tanh',
-            return_sequences=True
+            return_sequences=True,
+            bias_initializer=tf.zeros_initializer()
         ),
         Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
@@ -38,6 +40,7 @@ def get_LSTM_attention_model(time_steps,
         Dense(
             units=128,
             kernel_initializer=glorot_normal(seed),
+            bias_initializer=tf.zeros_initializer()
         ),
         Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
@@ -45,7 +48,8 @@ def get_LSTM_attention_model(time_steps,
         # 第四层
         Dense(
             units=64,
-            kernel_initializer=glorot_normal(seed)
+            kernel_initializer=glorot_normal(seed),
+            bias_initializer=tf.zeros_initializer()
         ),
         Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
@@ -54,7 +58,8 @@ def get_LSTM_attention_model(time_steps,
         Dense(
             units=2,
             activation='softmax',
-            kernel_initializer=glorot_normal(seed)
+            kernel_initializer=glorot_normal(seed),
+            bias_initializer=tf.zeros_initializer()
         ),
     ])
     adam = Adam(learning_rate)

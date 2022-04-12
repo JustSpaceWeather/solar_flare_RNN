@@ -1,4 +1,5 @@
 import keras
+import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import InputLayer, Bidirectional, LSTM, Dense, Dropout, BatchNormalization, Activation
 from keras.optimizers import Adam
@@ -27,7 +28,8 @@ def get_Bi_LSTM_model(time_steps,
             LSTM(
                 units=256,
                 kernel_initializer=glorot_normal(seed),
-                activation='tanh'
+                activation='tanh',
+                bias_initializer=tf.zeros_initializer()
             ),
         ),
         Dropout(dropout_rate, seed=seed),
@@ -35,7 +37,8 @@ def get_Bi_LSTM_model(time_steps,
         # 第二层
         Dense(
             units=128,
-            kernel_initializer=glorot_normal(seed)
+            kernel_initializer=glorot_normal(seed),
+            bias_initializer=tf.zeros_initializer()
         ),
         Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
@@ -43,7 +46,8 @@ def get_Bi_LSTM_model(time_steps,
         # 第三层
         Dense(
             units=64,
-            kernel_initializer=glorot_normal(seed)
+            kernel_initializer=glorot_normal(seed),
+            bias_initializer=tf.zeros_initializer()
         ),
         Dropout(dropout_rate, seed=seed),
         BatchNormalization(),
@@ -52,7 +56,8 @@ def get_Bi_LSTM_model(time_steps,
         Dense(
             units=2,
             activation='softmax',
-            kernel_initializer=glorot_normal(seed)
+            kernel_initializer=glorot_normal(seed),
+            bias_initializer=tf.zeros_initializer()
         ),
     ])
     adam = Adam(learning_rate)
