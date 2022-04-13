@@ -21,7 +21,7 @@ def LSTM_C_train(p: str, file_config, train_type: str) -> None:
     train_list = load_data_list(file_config.train_file)
     valid_list = load_data_list(file_config.valid_file)
     best_TSS_dir = {}
-    for time_steps in [120]:  # seed_config.time_steps_list:
+    for time_steps in train_config.time_steps_list:
         is_new = True
         best_TSS_list = []  # 保存每个训练集的最好的TSS
         model_save_path = p + '/weights/' + train_type + '/LSTM_best≥C/time_steps=' + str(time_steps)
