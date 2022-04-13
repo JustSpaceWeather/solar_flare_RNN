@@ -28,7 +28,7 @@ if __name__ == '__main__':
     for time_steps in [120]: # seed_config.time_steps_list:
         is_new = True
         best_TSS_list = []  # 保存每个训练集的最好的TSS
-        model_save_path = p + '/weights/TVT/LSTM_attention_best≥C/time_steps=' + str(time_steps)
+        model_save_path = p + '/weights/TVT/LSTM_attention2_best≥C/time_steps=' + str(time_steps)
         for i in range(10):
             (x_train, y_train, train_weight_dir), (x_valid, y_valid, valid_weight_dir) = load_data_C(train_list[i],
                                                                                                      valid_list[i])
@@ -62,14 +62,14 @@ if __name__ == '__main__':
                     model=model,
                     best_TSS=best_TSS,
                     y_true=y_true, y_pred=y_pred,
-                    filename=model_save_path + '/LSTM_attention_C_' + str(time_steps) + '_best_' + str(i) + '.h5'
+                    filename=model_save_path + '/LSTM_attention2_C_' + str(time_steps) + '_best_' + str(i) + '.h5'
                 )
                 loss_list.append(history.history['loss'])
                 val_loss_list.append(history.history['val_loss'])
                 print('======================================')
             save_loss(
                 loss_list, val_loss_list, config.epoch,
-                model_save_path + '/LSTM_attention_C_' + str(time_steps) + '_best_' + str(i) + '.jpg',
+                model_save_path + '/LSTM_attention2_C_' + str(time_steps) + '_best_' + str(i) + '.jpg',
                 is_new
             )
             is_new = False

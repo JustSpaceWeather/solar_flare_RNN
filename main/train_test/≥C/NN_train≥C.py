@@ -13,6 +13,8 @@ from util.show_pic_util import save_loss
 from config.Config import TrainConfig
 from config.Config import TTFileConfig
 
+import keras.backend as K
+
 # 训练参数
 file_config = TTFileConfig(p)
 config = TrainConfig()
@@ -64,6 +66,7 @@ if __name__ == '__main__':
             print('======================================')
         save_loss(loss_list, val_loss_list, config.epoch, model_save_path + '/NN_C_best_' + str(i) + '.jpg', False)
         best_TSS_list.append(best_TSS)
+        K.clear_session()
     # 全部训练完成后，打印所有权重的指标
     for best_TSS in best_TSS_list:
         print(best_TSS)

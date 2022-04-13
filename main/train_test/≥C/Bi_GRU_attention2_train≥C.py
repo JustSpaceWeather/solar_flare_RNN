@@ -14,6 +14,7 @@ from util.show_pic_util import save_loss
 from config.Config import TrainConfig
 from config.Config import TTFileConfig
 
+import tensorflow.keras.backend as K
 # 训练参数
 file_config = TTFileConfig(p)
 config = TrainConfig()
@@ -48,8 +49,9 @@ if __name__ == '__main__':
             loss_list, val_loss_list = [], []
             for j in range(config.epoch):
                 print("time_steps =", time_steps)
-                print(train_list[i] + '\n' + test_list[i] + '\nEpoch ' + str(j + 1) + '/' + str(
-                    config.epoch))  # 打印当前训练的训练集和代数                # 开始训练
+                # 打印当前训练的训练集和代数
+                print(train_list[i] + '\n' + test_list[i] + '\nEpoch ' + str(j + 1) + '/' + str(config.epoch))
+                # 开始训练
                 history = model.fit(
                     x_train, y_train,
                     batch_size=config.batch_size,
@@ -77,6 +79,7 @@ if __name__ == '__main__':
             )
             is_new = False
             best_TSS_list.append(best_TSS)
+            K.clear_session()
         # 全部训练完成后，打印所有权重的指标
         print('time_steps =', time_steps)
         best_TSS_dir[time_steps] = best_TSS_list

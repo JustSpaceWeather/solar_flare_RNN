@@ -28,7 +28,7 @@ if __name__ == '__main__':
     for i in range(10):
         (x_train, y_train, train_weight_dir), (x_test, y_test, test_weight_dir) = load_data_M(train_list[i],
                                                                                               test_list[i])
-        model_save_path = p + '/weights/TT/NN_best≥C_time_steps=' + str(time_steps)
+        model_save_path = p + '/weights/TT/NN_best≥M_time_steps=' + str(time_steps)
         model = get_NN_model(
             learning_rate=config.learning_rate,
             dropout_rate=config.dropout_rate,
