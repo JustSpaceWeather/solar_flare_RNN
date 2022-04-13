@@ -45,9 +45,11 @@ def Bi_GRU_attention2_C_train(p: str, file_config, train_type: str):
             best_TSS = float('-inf')
             loss_list, val_loss_list = [], []
             for j in range(config.epoch):
+                # 打印当前训练的时间步、训练集和代数
                 print("time_steps =", time_steps)
-                print(train_list[i] + '\n' + valid_list[i] + '\nEpoch ' + str(j + 1) + '/' + str(
-                    config.epoch))  # 打印当前训练的训练集和代数
+                print(train_list[i])
+                print(valid_list[i])
+                print('Epoch ' + str(j + 1) + '/' + str(train_config.epoch))
                 # 开始训练
                 history = model.fit(
                     x_train, y_train,

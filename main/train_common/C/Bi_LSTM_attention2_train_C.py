@@ -14,7 +14,7 @@ def Bi_LSTM_attention2_C_train(p: str, file_config, train_type: str) -> None:
     """
     :param p: 根目录地址
     :param file_config: train_config.Config
-    :param train_type: TT, TVT, 2018, 2020
+    :param train_type: TT, TVT, 2018, 2022
     """
     # 训练参数
     train_config = TrainConfig()

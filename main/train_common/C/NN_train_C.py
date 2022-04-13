@@ -13,7 +13,7 @@ def NN_C_train(p: str, file_config, train_type: str) -> None:
     """
     :param p: 根目录地址
     :param file_config: train_config.Config
-    :param train_type: TT, TVT, 2018, 2020
+    :param train_type: TT, TVT, 2018, 2022
     """
     train_config = TrainConfig()
     set_seed()

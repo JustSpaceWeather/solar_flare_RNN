@@ -14,10 +14,9 @@ def GRU_C_train(p: str, file_config, train_type: str):
     """
     :param p: 根目录地址
     :param file_config: train_config.Config
-    :param train_type: TT, TVT, 2018, 2020
+    :param train_type: TT, TVT, 2018, 2022
     :return:
     """
-    pass
     # 训练参数
     train_config = TrainConfig()
     set_seed()
