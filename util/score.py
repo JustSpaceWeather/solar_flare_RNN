@@ -3,113 +3,15 @@ from keras import Model
 from util.scoreClass import Metric
 import tensorflow as tf
 
-
-def base(y_true, y_pred):
-    gt = tf.convert_to_tensor(y_true)
-    pd = tf.convert_to_tensor(y_pred)
-
-    gt_positive = tf.round(tf.clip_by_value(gt, 0, 1))
-    gt_negative = 1 - gt_positive
-
-    pd_positive = tf.round(tf.clip_by_value(pd, 0, 1))
-    pd_negative = 1 - pd_positive
-
-    tp = tf.reduce_sum(gt_positive * pd_positive)
-    tn = tf.reduce_sum(gt_negative * pd_negative)
-    fp = tf.reduce_sum(gt_negative * pd_positive)
-    fn = tf.reduce_sum(gt_positive * pd_negative)
-
-
-def TP(y_true, y_pred):
-
-    y_pred_positive = K.round(K.clip(y_pred, 0, 1))
-    y_positive = K.round(K.clip(y_true, 0, 1))
-    tp = K.sum(y_positive * y_pred_positive) * 2
-    print('tp-----------------------------', tp)
-    tn = TN(y_true,y_pred)
-    print('tn-------------------------------',tn)
-    print(type(tp))
-    return tp
-
-
-def TN(y_true, y_pred):
-    y_true_index = K.argmax(y_true, axis=1)
-    y_pred_index = K.argmax(y_pred, axis=1)
-    tn = K.sum(y_true_index * y_pred_index)
-    return tn
-
-
-def FP(y_true, y_pred):
-    y_pred_positive = K.round(K.clip(y_pred, 0, 1))
-    y_positive = K.round(K.clip(y_true, 0, 1))
-    y_negative = 1 - y_positive
-    fp = K.sum(y_negative * y_pred_positive)
-    return fp
-
-
-def FN(y_true, y_pred):
-    y_pred_positive = K.round(K.clip(y_pred, 0, 1))
-    y_pred_negative = 1 - y_pred_positive
-    y_positive = K.round(K.clip(y_true, 0, 1))
-    fn = K.sum(y_positive * y_pred_negative)
-    return fn
-
-
-def TPRate(y_true, y_pred):
-    TP, TN, FP, FN = base(y_true, y_pred)
-    return TP / (TP + FN)
-
-
-def TNRate(y_true, y_pred):
-    TP, TN, FP, FN = base(y_true, y_pred)
-    return TN / (TN + FP)
-
-
-def FPRate(y_true, y_pred):
-    return 1 - TNRate(y_true, y_pred)
-
-
-def FNRate(y_true, y_pred):
-    return 1 - TPRate(y_true, y_pred)
-
-
-def Accuracy(y_true, y_pred):
-    TP, TN, FP, FN = base(y_true, y_pred)
-    ALL = TP + FP + TN + FN
-    RIGHT = TP + TN
-    return RIGHT / (ALL + K.epsilon())
-
-
-def Recall(y_true, y_pred):
-    TP, TN, FP, FN = base(y_true, y_pred)
-    return TP / (TP + FN)
-
-
-def Precision(y_true, y_pred):
-    TP, TN, FP, FN = base(y_true, y_pred)
-    return TP / (TP + FP)
-
-
-def TSS(y_true, y_pred):
-    pass
-
-
-def HSS(y_true, y_pred):
-    TP, TN, FP, FN = base(y_true, y_pred)
-    P = TP + FN
-    N = TN + FP
-    up = 2 * (TP * TN - FN * FP)
-    below = P * (FN + TN) + N * (TP + FP)
-    return up / (below + K.epsilon())
-
-
-def FAR(y_true, y_pred):
-    TP, TN, FP, FN = base(y_true, y_pred)
-    return FP / (FP + TP + K.epsilon())
+a = tf.constant([2, 8])  # 定义tensor常量
+b = K.square(a)
+with tf.Session() as sess:
+    print(type(sess.run(b)))
+    print(sess.run(b))
 
 
 def BSS(y_true, y_pred):
-    BS = K.mean(K.square(y_true - y_pred), axis=0)[1]
+    BS = K.mean(K.square(y_true - y_pred), axis=0)[1]  # 每一行的差的平方的平均值
     y_ave = K.mean(y_true, axis=0)
     return 1 - BS / (K.mean(K.square(y_true - y_ave), axis=0)[1] + K.epsilon())
 
@@ -127,10 +29,6 @@ def show_score_and_save_weights(model: Model, best_TSS, y_true, y_pred, filename
     metric = Metric(y_true, y_pred)  # 计算当前模型的TSS值
     new_TSS = metric.TSS()[0]
     print('Recall', metric.Recall(),
-          '\nTP', metric.TP(),
-          '\nTN', metric.TN(),
-          '\nFP', metric.FP(),
-          '\nFN', metric.FN(),
           '\nHSS', metric.HSS(),
           '\nAccuracy', metric.Accuracy(),
           '\nPrecision', metric.Precision(),

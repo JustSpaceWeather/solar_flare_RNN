@@ -20,7 +20,7 @@ from common.train_common.C.Bi_GRU_attention2_train_C import Bi_GRU_attention2_C_
 
 file_config = File2022Config(p)
 
-NN_C_train(p, file_config, '2022')
+# NN_C_train(p, file_config, '2022')
 LSTM_C_train(p, file_config, '2022')
 LSTM_attention_C_train(p, file_config, '2022')
 LSTM_attention2_C_train(p, file_config, '2022')
