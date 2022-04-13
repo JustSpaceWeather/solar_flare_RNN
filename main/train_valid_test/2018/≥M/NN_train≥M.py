@@ -13,6 +13,7 @@ from util.show_pic_util import save_loss
 from config.Config import TrainConfig
 from config.Config import File2018Config
 
+import keras.backend as K
 # 训练参数
 file_config = File2018Config(p)
 config = TrainConfig()

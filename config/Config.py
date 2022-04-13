@@ -35,6 +35,7 @@ class TTFileConfig(object):
     def __init__(self, p):
         self.train_file = p + '/data/20220102_TT/30_train_85858585/10_best_train'
         self.test_file = p + '/data/20220102_TT/30_test_85858585/10_best_test'
+        self.valid_file = self.test_file
 
 
 class TVTFileConfig(object):
