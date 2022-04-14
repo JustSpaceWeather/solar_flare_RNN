@@ -68,7 +68,7 @@ def LSTM_C_train(p: str, file_config, train_type: str) -> None:
                 )
                 loss_list.append(history.history['loss'])
                 val_loss_list.append(history.history['val_loss'])
-                print('======================================')
+                print('==================LSTM_train_C.py====================')
             save_loss(
                 loss_list, val_loss_list, train_config.epoch,
                 model_save_path + '/LSTM_C_' + str(time_steps) + '_best_' + str(i) + '.jpg',

@@ -70,7 +70,7 @@ def GRU_C_train(p: str, file_config, train_type: str):
                 )
                 loss_list.append(history.history['loss'])
                 val_loss_list.append(history.history['val_loss'])
-                print('======================================')
+                print('==================GRU_train_C.py====================')
             save_loss(
                 loss_list, val_loss_list, train_config.epoch,
                 model_save_path + '/GRU_C_' + str(time_steps) + '_best_' + str(i) + '.jpg',
