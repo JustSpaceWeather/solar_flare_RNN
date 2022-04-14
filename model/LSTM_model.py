@@ -4,7 +4,7 @@ from keras.models import Sequential
 from keras.layers import InputLayer, LSTM, Dropout, BatchNormalization
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
-from common.common_model import common_NN
+from common.model_common.common_model import common_NN
 
 
 def get_LSTM_model(time_steps, learning_rate: float, dropout_rate: float, seed: int, score_metrics: list):

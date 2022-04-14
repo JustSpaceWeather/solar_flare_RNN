@@ -5,7 +5,7 @@ from tensorflow.keras.layers import InputLayer, Bidirectional, GRU, Dropout, Bat
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.initializers import glorot_normal
 from layer.attention2 import Attention
-from common.common_tf_model import common_NN
+from common.model_common.common_tf_model import common_NN
 
 
 def get_Bi_GRU_attention_model(time_steps: int,
