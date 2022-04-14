@@ -4,7 +4,7 @@ from keras.models import Sequential
 from keras.layers import InputLayer, Bidirectional, GRU, Dense, Dropout, BatchNormalization, Activation
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
-from model.common import common_NN
+from common.common_model import common_NN
 
 
 def get_Bi_GRU_model(time_steps: int,
@@ -45,7 +45,8 @@ def get_Bi_GRU_model(time_steps: int,
             Dropout(dropout_rate, seed=seed),
             BatchNormalization(),
             Activation('relu'),
-        ] + common_NN(dropout_rate, seed))
+        ] + common_NN(dropout_rate, seed)
+    )
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,

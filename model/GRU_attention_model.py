@@ -1,11 +1,11 @@
 import keras
 import tensorflow as tf
 from keras.models import Sequential
-from keras.layers import InputLayer, GRU, Dense, Dropout, BatchNormalization, Activation
+from keras.layers import InputLayer, GRU, Dropout, BatchNormalization
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
 from layer.attention import Attention
-from model.common import common_NN
+from common.common_model import common_NN
 
 
 def get_GRU_attention_model(time_steps,
@@ -38,7 +38,9 @@ def get_GRU_attention_model(time_steps,
             BatchNormalization(),
             # 第二层Attention
             Attention(step_dim=time_steps),
-        ] + common_NN(dropout_rate, seed))
+            BatchNormalization()
+        ] + common_NN(dropout_rate, seed)
+    )
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,

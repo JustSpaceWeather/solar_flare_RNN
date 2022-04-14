@@ -1,10 +1,10 @@
 import keras
 import tensorflow as tf
 from keras.models import Sequential
-from keras.layers import InputLayer, LSTM, Dense, Dropout, BatchNormalization, Activation
+from keras.layers import InputLayer, LSTM, Dropout, BatchNormalization
 from keras.optimizers import Adam
 from keras.initializers import glorot_normal
-from model.common import common_NN
+from common.common_model import common_NN
 
 
 def get_LSTM_model(time_steps, learning_rate: float, dropout_rate: float, seed: int, score_metrics: list):
@@ -30,7 +30,8 @@ def get_LSTM_model(time_steps, learning_rate: float, dropout_rate: float, seed: 
             ),
             Dropout(dropout_rate, seed=seed),
             BatchNormalization(),
-        ] + common_NN(dropout_rate, seed))
+        ] + common_NN(dropout_rate, seed)
+    )
     adam = Adam(learning_rate)
     model.compile(
         optimizer=adam,

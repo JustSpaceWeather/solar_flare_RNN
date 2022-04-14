@@ -1,10 +1,8 @@
 import keras
-import tensorflow as tf
 from keras.models import Sequential
-from keras.layers import InputLayer, Dense, Dropout, BatchNormalization, Activation
+from keras.layers import InputLayer
 from keras.optimizers import Adam
-from keras.initializers import glorot_normal
-from model.common import common_NN
+from common.common_model import common_NN
 
 
 def get_NN_model(learning_rate: float, dropout_rate: float, seed: int, score_metrics: list):
