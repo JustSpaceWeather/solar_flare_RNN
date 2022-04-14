@@ -1,17 +1,6 @@
-import keras
 import tensorflow as tf
-from keras.models import Sequential
-from keras.layers import InputLayer, Dense, Dropout, BatchNormalization, Activation
-from keras.optimizers import Adam
+from keras.layers import Dense, Dropout, BatchNormalization, Activation
 from keras.initializers import glorot_normal
-
-
-def common_LSTM():
-    pass
-
-
-def common_GRU():
-    pass
 
 
 def common_NN(dropout_rate, seed):

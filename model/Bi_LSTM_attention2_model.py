@@ -5,7 +5,7 @@ from tensorflow.keras.layers import InputLayer, Bidirectional, LSTM, Dropout, Ba
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.initializers import glorot_normal
 from layer.attention2 import Attention
-from common.common_model import common_NN
+from common.common_tf_model import common_NN
 
 
 def get_Bi_LSTM_attention_model(time_steps,

@@ -5,7 +5,7 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirn
 sys.path.append(p)
 
 from config.Config import File2022Config
-from main.train_common.C.Bi_GRU_attention_train_C import Bi_GRU_attention_C_train
+from common.train_common.C.Bi_GRU_attention_train_C import Bi_GRU_attention_C_train
 
 file_config = File2022Config(p)
 Bi_GRU_attention_C_train(p, file_config, '2022')

@@ -5,7 +5,7 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirn
 sys.path.append(p)
 
 from config.Config import TVTFileConfig
-from main.train_common.M.Bi_LSTM_train_M import Bi_LSTM_M_train
+from common.train_common.M.Bi_LSTM_train_M import Bi_LSTM_M_train
 
 file_config = TVTFileConfig(p)
 Bi_LSTM_M_train(p, file_config, 'TVT')

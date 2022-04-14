@@ -1,3 +1,6 @@
+from util.score import TP, TN, FP, FN, TSS
+
+
 class SeedConfig(object):
     """
     随机数种子配置
@@ -19,10 +22,10 @@ class TrainConfig(object):
         self.learning_rate = 1e-3
         self.dropout_rate = 0.5
         self.glorot_normal_seed = 369
-        self.score_metrics = ['acc']
+        self.score_metrics = ['acc']#, TP, TN
         self.epoch = 100
         self.batch_size = 64
-        self.time_steps_list = [120]  # 1, 10, 12, 15, 20, 24, 30, 40, 60,
+        self.time_steps_list = [60]  # 1, 10, 12, 15, 20, 24, 30, 40, 60, 120
         self.verbose = 1  # 0不显示结果和进度条，1显示结果和进度条，2只显示结果不显示进度条
 
 

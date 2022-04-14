@@ -12,7 +12,7 @@ class Metric(object):
         return self.__matrix
 
     def TP(self):
-        tp = np.diag(self.__matrix)
+        tp = np.diag(self.__matrix)  # diag 输出二维矩阵对角线元素
         return tp.astype(float)
 
     def TN(self):
