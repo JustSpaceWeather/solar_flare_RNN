@@ -1,4 +1,5 @@
 import numpy as np
+import keras.backend as K
 from util.load_data import load_train_or_test_C
 from util.load_data import load_data_list
 from model.GRU_model import get_GRU_model
@@ -96,3 +97,4 @@ def GRU_C(p, file_config, detect_type, class_type: str) -> None:
         print(data_FAR[:, 0].mean(), data_FAR[:, 1].mean())
         print(data_FAR[:, 0].std(), data_FAR[:, 1].std())
         print("==================================")
+        K.clear_session()

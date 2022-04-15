@@ -1,4 +1,5 @@
 import numpy as np
+import keras.backend as K
 from util.load_data import load_train_or_test_C, load_train_or_test_M
 from util.load_data import load_data_list
 from model.LSTM_attention_model import get_LSTM_attention_model
@@ -83,21 +84,6 @@ def LSTM_Att_C(p, file_config, detect_type, class_type: str) -> None:
         data_Recall = np.array(data_Recall).reshape(10, 2)
         data_FAR = np.array(data_FAR).reshape(10, 2)
         data_HSS = np.array(data_HSS).reshape(10, 2)
-        # print("各种指标的平均值与标准差如下所示：")
-        # print("Recall mean:", data_Recall[:, 0].mean(), data_Recall[:, 1].mean())
-        # print("Recall std:", data_Recall[:, 0].std(), data_Recall[:, 1].std())
-        # print("TSS mean:", data_TSS[:, 0].mean(), data_TSS[:, 1].mean())
-        # print("TSS std:", data_TSS[:, 0].std(), data_TSS[:, 1].std())
-        # print("HSS mean:", data_HSS[:, 0].mean(), data_HSS[:, 1].mean())
-        # print("HSS std:", data_HSS[:, 0].std(), data_HSS[:, 1].std())
-        # print("Accuracy mean:", data_Accuracy[:, 0].mean(), data_Accuracy[:, 1].mean())
-        # print("Accuracy std:", data_Accuracy[:, 0].std(), data_Accuracy[:, 1].std())
-        # print("Precision mean:", data_Precision[:, 0].mean(), data_Precision[:, 1].mean())
-        # print("Precision std:", data_Precision[:, 0].std(), data_Precision[:, 1].std())
-        # print("FAR mean:", data_FAR[:, 0].mean(), data_FAR[:, 1].mean())
-        # print("FAR std:", data_FAR[:, 0].std(), data_FAR[:, 1].std())
-
-        # print(time_steps)
         print(data_Recall[:, 0].mean(), data_Recall[:, 1].mean())
         print(data_Recall[:, 0].std(), data_Recall[:, 1].std())
         print(data_TSS[:, 0].mean(), data_TSS[:, 1].mean())
@@ -111,3 +97,4 @@ def LSTM_Att_C(p, file_config, detect_type, class_type: str) -> None:
         print(data_FAR[:, 0].mean(), data_FAR[:, 1].mean())
         print(data_FAR[:, 0].std(), data_FAR[:, 1].std())
         print("==================================")
+        K.clear_session()
