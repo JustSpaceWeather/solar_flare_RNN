@@ -1,17 +1,18 @@
 import numpy as np
 from util.load_data import load_train_or_test_C
 from util.load_data import load_data_list
-from model.Bi_GRU_attention_model import get_Bi_GRU_attention_model
+from model.GRU_model import get_GRU_model
 from util.scoreClass import Metric
 from util.load_data import Rectify
 from config.Config import DetectConfig, TrainConfig
 
 
-def BGRU_Att_C(p, file_config, detect_type) -> None:
+def GRU_C(p, file_config, detect_type, class_type: str) -> None:
     """
     :param p: 项目根目录地址
     :param file_config: 训练文件配置类对象
     :param detect_type: 数据集类型  TT TVT 2018 2022
+    :param class_type: 分类类型  C  M
     """
     detect_config = DetectConfig()
     train_config = TrainConfig()
@@ -30,9 +31,13 @@ def BGRU_Att_C(p, file_config, detect_type) -> None:
         all_nums = 0
         for i in range(10):
             all_nums += 1
-            x_test, y_test, test_weight_dir = load_train_or_test_C(test_list[i])
+            x_test, y_test, test_weight_dir = None, None, None
+            if class_type == 'C':
+                x_test, y_test, test_weight_dir = load_train_or_test_C(test_list[i])
+            elif class_type == 'M':
+                x_test, y_test, test_weight_dir = load_train_or_test_M(test_list[i])
             # 载入模型
-            model = get_Bi_GRU_attention_model(
+            model = get_GRU_model(
                 time_steps=time_steps,
                 learning_rate=train_config.learning_rate,
                 dropout_rate=0.0,
@@ -40,8 +45,7 @@ def BGRU_Att_C(p, file_config, detect_type) -> None:
                 score_metrics=detect_config.score_metrics
             )
             model.load_weights(
-                p + '/weights/' + detect_type + '/Bi_GRU_attention_best≥C/time_steps=' + str(
-                    time_steps) + '/Bi_GRU_attention_C_' + str(
+                p + '/weights/' + detect_type + '/GRU_best≥' + class_type + '/time_steps=' + str(time_steps) + '/GRU_' + class_type + '_' + str(
                     time_steps
                 ) + '_best_' + str(i) + '.h5'
             )
@@ -53,7 +57,7 @@ def BGRU_Att_C(p, file_config, detect_type) -> None:
             y_pred = model.predict(x_test_time_step).argmax(axis=1)
             # 指标输出
             metric = Metric(y_true, y_pred)
-            # print(metric.Matrix())
+            # print("Matrix:/n", metric.Matrix())
             print(metric.Recall())
             print(metric.Precision())
             print(metric.Accuracy())
