@@ -8,7 +8,7 @@ from util.load_data import Rectify
 from config.Config import DetectConfig, TrainConfig
 
 
-def BGRU_Att_C(p, file_config, detect_type, class_type: str) -> None:
+def BGRU_Att(p, file_config, detect_type, class_type: str) -> None:
     """
     :param p: 项目根目录地址
     :param file_config: 训练文件配置类对象

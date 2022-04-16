@@ -1,14 +1,14 @@
 import numpy as np
 import keras.backend as K
-from util.load_data import load_train_or_test_C
+from util.load_data import load_train_or_test_C, load_train_or_test_M
 from util.load_data import load_data_list
-from model.GRU_model import get_GRU_model
+from model.NN_model import get_NN_model
 from util.scoreClass import Metric
 from util.load_data import Rectify
 from config.Config import DetectConfig, TrainConfig
 
 
-def GRU_C(p, file_config, detect_type, class_type: str) -> None:
+def NN(p, file_config, detect_type, class_type: str) -> None:
     """
     :param p: 项目根目录地址
     :param file_config: 训练文件配置类对象
@@ -31,6 +31,7 @@ def GRU_C(p, file_config, detect_type, class_type: str) -> None:
         data_Recall, data_Precision, data_Accuracy, data_TSS, data_HSS, data_FAR = [], [], [], [], [], []
         all_nums = 0
         for i in range(10):
+            # print(test_list[i])
             all_nums += 1
             x_test, y_test, test_weight_dir = None, None, None
             if class_type == 'C':
@@ -38,27 +39,24 @@ def GRU_C(p, file_config, detect_type, class_type: str) -> None:
             elif class_type == 'M':
                 x_test, y_test, test_weight_dir = load_train_or_test_M(test_list[i])
             # 载入模型
-            model = get_GRU_model(
-                time_steps=time_steps,
+            model = get_NN_model(
                 learning_rate=train_config.learning_rate,
                 dropout_rate=0.0,
                 seed=train_config.glorot_normal_seed,
                 score_metrics=detect_config.score_metrics
             )
             model.load_weights(
-                p + '/weights/' + detect_type + '/GRU_best≥' + class_type + '/time_steps=' + str(time_steps) + '/GRU_' + class_type + '_' + str(
-                    time_steps
-                ) + '_best_' + str(i) + '.h5'
+                p + '/weights/' + detect_type + '/NN_best≥' + class_type + '_time_steps=1/NN_' + class_type
+                + '_best_' + str(i) + '.h5'
             )
             # 根据时间步修改测试集shape
-            x_test_time_step = x_test.reshape(-1, time_steps, 10)
+            x_test_time_step = Rectify(x_test, time_steps)
             y_test_time_step = Rectify(y_test, time_steps)
             # 开始预测
             y_true = y_test_time_step.argmax(axis=1)
             y_pred = model.predict(x_test_time_step).argmax(axis=1)
             # 指标输出
             metric = Metric(y_true, y_pred)
-            # print("Matrix:/n", metric.Matrix())
             print(metric.Recall())
             print(metric.Precision())
             print(metric.Accuracy())

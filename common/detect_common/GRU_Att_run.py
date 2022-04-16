@@ -2,13 +2,13 @@ import numpy as np
 import keras.backend as K
 from util.load_data import load_train_or_test_C, load_train_or_test_M
 from util.load_data import load_data_list
-from model.LSTM_model import get_LSTM_model
+from model.GRU_attention_model import get_GRU_attention_model
 from util.scoreClass import Metric
 from util.load_data import Rectify
 from config.Config import DetectConfig, TrainConfig
 
 
-def LSTM_C(p, file_config, detect_type, class_type: str) -> None:
+def GRU_Att(p, file_config, detect_type, class_type: str) -> None:
     """
     :param p: 项目根目录地址
     :param file_config: 训练文件配置类对象
@@ -39,7 +39,7 @@ def LSTM_C(p, file_config, detect_type, class_type: str) -> None:
             elif class_type == 'M':
                 x_test, y_test, test_weight_dir = load_train_or_test_M(test_list[i])
             # 载入模型
-            model = get_LSTM_model(
+            model = get_GRU_attention_model(
                 time_steps=time_steps,
                 learning_rate=train_config.learning_rate,
                 dropout_rate=0.0,
@@ -47,9 +47,10 @@ def LSTM_C(p, file_config, detect_type, class_type: str) -> None:
                 score_metrics=detect_config.score_metrics
             )
             model.load_weights(
-                p + '/weights/' + detect_type + '/LSTM_best≥' + class_type + '/time_steps=' + str(
+                p + '/weights/' + detect_type + '/GRU_attention_best≥' + class_type + '/time_steps=' + str(
+                    time_steps) + '/GRU_attention_' + class_type + '_' + str(
                     time_steps
-                ) + '/LSTM_' + class_type + '_' + str(time_steps) + '_best_' + str(i) + '.h5'
+                ) + '_best_' + str(i) + '.h5'
             )
             # 根据时间步修改测试集shape
             x_test_time_step = x_test.reshape(-1, time_steps, 10)

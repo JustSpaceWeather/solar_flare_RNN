@@ -62,3 +62,9 @@ class Metric(object):
 
     def FAR(self):
         return self.FP() / (self.FP() + self.TP() + sys.float_info.epsilon)
+
+    def POD(self):
+        return self.TP() / (self.TP() + self.FN() + sys.float_info.epsilon)
+
+    def CSI(self):
+        return self.TP() / (self.TP() + self.FP() + self.FN() + sys.float_info.epsilon)
