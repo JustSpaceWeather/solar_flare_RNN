@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 p = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(p)

@@ -1,9 +1,10 @@
 import keras
 import tensorflow as tf
-from keras.models import Sequential
-from keras.layers import InputLayer, Bidirectional, LSTM, Dropout, BatchNormalization
-from keras.optimizers import Adam
 from keras.initializers import glorot_normal
+from keras.layers import InputLayer, Bidirectional, LSTM, Dropout, BatchNormalization
+from keras.models import Sequential
+from keras.optimizers import Adam
+
 from common.model_common.common_model import common_NN
 
 

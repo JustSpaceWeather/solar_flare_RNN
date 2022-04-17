@@ -1,13 +1,13 @@
-from model.LSTM_model import get_LSTM_model
-from util.load_data import load_data_list
-from util.load_data import load_data_C
-from util.load_data import Rectify
-from util.set_seed import set_seed
-from util.score import show_score_and_save_weights
-from util.show_pic_util import save_loss
-from config.Config import TrainConfig
-
 import keras.backend as K
+
+from config.Config import TrainConfig
+from model.LSTM_model import get_LSTM_model
+from util.load_data import Rectify
+from util.load_data import load_data_C
+from util.load_data import load_data_list
+from util.score import show_score_and_save_weights
+from util.set_seed import set_seed
+from util.show_pic_util import save_loss
 
 
 def LSTM_C_train(p: str, file_config, train_type: str) -> None:

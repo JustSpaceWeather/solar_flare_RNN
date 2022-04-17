@@ -1,11 +1,12 @@
 import keras
 import tensorflow as tf
-from keras.models import Sequential
-from keras.layers import InputLayer, LSTM, Dropout, BatchNormalization
-from keras.optimizers import Adam
 from keras.initializers import glorot_normal
-from layer.attention import Attention
+from keras.layers import InputLayer, LSTM, Dropout, BatchNormalization
+from keras.models import Sequential
+from keras.optimizers import Adam
+
 from common.model_common.common_model import common_NN
+from layer.attention import Attention
 
 
 def get_LSTM_attention_model(time_steps,

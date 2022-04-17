@@ -1,11 +1,12 @@
-from tensorflow import keras
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import InputLayer, Bidirectional, GRU, Dropout, BatchNormalization
-from tensorflow.keras.optimizers import Adam
+from tensorflow import keras
 from tensorflow.keras.initializers import glorot_normal
-from layer.attention2 import Attention
+from tensorflow.keras.layers import InputLayer, Bidirectional, GRU, Dropout, BatchNormalization
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import Adam
+
 from common.model_common.common_tf_model import common_NN
+from layer.attention2 import Attention
 
 
 def get_Bi_GRU_attention_model(time_steps: int,

@@ -1,7 +1,3 @@
-from util.score import TP, TN, FP, FN
-# from keras.backend
-
-
 class SeedConfig(object):
     """
     随机数种子配置

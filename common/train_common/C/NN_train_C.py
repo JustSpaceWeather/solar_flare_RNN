@@ -1,12 +1,12 @@
-from model.NN_model import get_NN_model
-from util.load_data import load_data_list
-from util.load_data import load_data_C
-from util.set_seed import set_seed
-from util.score import show_score_and_save_weights
-from util.show_pic_util import save_loss
-from config.Config import TrainConfig
-
 import keras.backend as K
+
+from config.Config import TrainConfig
+from model.NN_model import get_NN_model
+from util.load_data import load_data_C
+from util.load_data import load_data_list
+from util.score import show_score_and_save_weights
+from util.set_seed import set_seed
+from util.show_pic_util import save_loss
 
 
 def NN_C_train(p: str, file_config, train_type: str) -> None:

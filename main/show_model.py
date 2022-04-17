@@ -1,8 +1,9 @@
-from keras.utils.vis_utils import plot_model
 import matplotlib.pyplot as plt
+from keras.utils.vis_utils import plot_model
+
+from config.Config import TrainConfig
 from model import NN_model, LSTM_model, Bi_LSTM_model, LSTM_attention_model, Bi_LSTM_attention_model, GRU_model, \
     Bi_GRU_model, GRU_attention_model, Bi_GRU_attention_model
-from config.Config import TrainConfig
 
 
 def save_show_model(model, file_name):

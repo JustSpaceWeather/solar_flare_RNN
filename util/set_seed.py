@@ -1,8 +1,10 @@
 import os
 import random
+
 import numpy as np
 import tensorflow as tf
 from tfdeterminism import patch
+
 from config.Config import SeedConfig
 
 

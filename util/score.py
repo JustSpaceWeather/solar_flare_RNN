@@ -1,7 +1,8 @@
-from keras import backend as K
-from keras import Model
-from util.scoreClass import Metric
 import tensorflow as tf
+from keras import Model
+from keras import backend as K
+
+from util.scoreClass import Metric
 
 a = tf.constant([2, 8])  # 定义tensor常量
 b = K.square(a)

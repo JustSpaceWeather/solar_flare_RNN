@@ -1,13 +1,13 @@
-from model.GRU_attention2_model import get_GRU_attention_model
-from util.load_data import load_data_list
-from util.load_data import load_data_C
-from util.load_data import Rectify
-from util.set_seed import set_seed
-from util.score import show_score_and_save_weights
-from util.show_pic_util import save_loss
-from config.Config import TrainConfig
-
 import tensorflow.keras.backend as K
+
+from config.Config import TrainConfig
+from model.GRU_attention2_model import get_GRU_attention_model
+from util.load_data import Rectify
+from util.load_data import load_data_C
+from util.load_data import load_data_list
+from util.score import show_score_and_save_weights
+from util.set_seed import set_seed
+from util.show_pic_util import save_loss
 
 
 def GRU_attention2_C_train(p: str, file_config, train_type: str):
@@ -34,7 +34,8 @@ def GRU_attention2_C_train(p: str, file_config, train_type: str):
             y_train = Rectify(y_train, time_steps)
             y_valid = Rectify(y_valid, time_steps)
             model = get_GRU_attention_model(time_steps=time_steps, learning_rate=train_config.learning_rate,
-                                            dropout_rate=train_config.dropout_rate, seed=train_config.glorot_normal_seed,
+                                            dropout_rate=train_config.dropout_rate,
+                                            seed=train_config.glorot_normal_seed,
                                             score_metrics=train_config.score_metrics)
             # 评价指标初始化
             best_TSS = float('-inf')

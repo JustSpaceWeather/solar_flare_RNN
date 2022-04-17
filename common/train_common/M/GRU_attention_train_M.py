@@ -1,12 +1,15 @@
-from model.GRU_attention_model import get_GRU_attention_model
-from util.load_data import load_data_list
-from util.load_data import load_data_M
-from util.load_data import Rectify
-from util.set_seed import set_seed
-from util.score import show_score_and_save_weights
-from util.show_pic_util import save_loss
-from config.Config import TrainConfig
 import keras.backend as K
+
+from config.Config import TrainConfig
+from model.GRU_attention_model import get_GRU_attention_model
+from util.load_data import Rectify
+from util.load_data import load_data_M
+from util.load_data import load_data_list
+from util.score import show_score_and_save_weights
+from util.set_seed import set_seed
+from util.show_pic_util import save_loss
+
+
 def GRU_attention_M_train(p: str, file_config, train_type: str):
     """
     :param p: 根目录地址
@@ -16,12 +19,12 @@ def GRU_attention_M_train(p: str, file_config, train_type: str):
     """
     train_config = TrainConfig()
     set_seed()
-    
+
     train_list = load_data_list(file_config.train_file)
     valid_list = load_data_list(file_config.valid_file)
-    
+
     best_TSS_dir = {}
-    
+
     for time_steps in train_config.time_steps_list:
         is_new = True
         best_TSS_list = []  # 保存每个训练集的最好的TSS

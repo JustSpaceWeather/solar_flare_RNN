@@ -1,7 +1,8 @@
 import keras
-from keras.models import Sequential
 from keras.layers import InputLayer
+from keras.models import Sequential
 from keras.optimizers import Adam
+
 from common.model_common.common_model import common_NN
 
 

@@ -1,6 +1,6 @@
 import tensorflow as tf
-from keras.layers import Dense, Dropout, BatchNormalization, Activation
 from keras.initializers import glorot_normal
+from keras.layers import Dense, Dropout, BatchNormalization, Activation
 
 
 def common_NN(dropout_rate, seed):

@@ -1,5 +1,6 @@
-import sys
 import os
+import sys
+
 import numpy as np
 
 p = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -1,8 +1,7 @@
 import os
 
-import pandas as pd
 import numpy as np
-
+import pandas as pd
 from tensorflow.python.keras.utils import np_utils
 
 
@@ -125,4 +124,3 @@ def Rectify(_y, time_steps):
         temp_y.append(_y[i])
     _y = np.array(temp_y)
     return _y
-
