@@ -43,7 +43,11 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_and_loa
             model_path = get_model_path(p, detect_type, class_type, model_name, time_steps, i)
             model = get_and_load_model(time_steps, model_path)
             # 根据时间步修改测试集shape
-            x_test_time_step = x_test.reshape(-1, time_steps, 10)
+            x_test_time_step = None
+            if detect_type == 'NN':
+                x_test_time_step = Rectify(x_test, time_steps)
+            else:
+                x_test_time_step = x_test.reshape(-1, time_steps, 10)
             y_test_time_step = Rectify(y_test, time_steps)
             # 开始预测
             y_true = y_test_time_step.argmax(axis=1)
