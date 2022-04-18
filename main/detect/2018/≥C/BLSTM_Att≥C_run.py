@@ -5,7 +5,7 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirn
 sys.path.append(p)
 
 from common.detect_common.BLSTM_Att_run import BLSTM_Att
-from config.Config import TTFileConfig
+from config.Config import File2018Config
 
-file_config = TTFileConfig(p)
+file_config = File2018Config(p)
 BLSTM_Att(p, file_config, '2018', 'C')

@@ -71,6 +71,13 @@ class File2022Config(object):
         self.test_file = p + '/data/20200412_2022/test'
 
 
+def File202240Config(object):
+    def __init__(self, p):
+        self.train_file = p + '/data/20220418_40/train'
+        self.valid_file = p + '/data/20220418_40/valid'
+        self.test_file = p + '/data/20220418_40/test'
+
+
 class DetectConfig(object):
     """
     测试参数配置

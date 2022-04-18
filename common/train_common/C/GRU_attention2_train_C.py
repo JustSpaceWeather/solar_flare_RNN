@@ -33,10 +33,13 @@ def GRU_attention2_C_train(p: str, file_config, train_type: str):
             x_valid = x_valid.reshape(-1, time_steps, 10)
             y_train = Rectify(y_train, time_steps)
             y_valid = Rectify(y_valid, time_steps)
-            model = get_GRU_attention_model(time_steps=time_steps, learning_rate=train_config.learning_rate,
-                                            dropout_rate=train_config.dropout_rate,
-                                            seed=train_config.glorot_normal_seed,
-                                            score_metrics=train_config.score_metrics)
+            model = get_GRU_attention_model(
+                time_steps=time_steps,
+                learning_rate=train_config.learning_rate,
+                dropout_rate=train_config.dropout_rate,
+                seed=train_config.glorot_normal_seed,
+                score_metrics=train_config.score_metrics
+            )
             # 评价指标初始化
             best_TSS = float('-inf')
             loss_list, val_loss_list = [], []

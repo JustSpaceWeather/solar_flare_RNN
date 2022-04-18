@@ -35,15 +35,17 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_and_loa
         for i in range(10):  # 循环10-Fold文件
             all_nums += 1
             x_test, y_test, test_weight_dir = None, None, None
+            model_path = None
             if class_type == 'C':
                 x_test, y_test, test_weight_dir = load_train_or_test_C(test_list[i])
+                model_path = get_model_path(p, detect_type, class_type, model_name, time_steps, 1)
             elif class_type == 'M':
                 x_test, y_test, test_weight_dir = load_train_or_test_M(test_list[i])
+                model_path = get_model_path(p, detect_type, class_type, model_name, time_steps, i)
             # 载入模型
-            model_path = get_model_path(p, detect_type, class_type, model_name, time_steps, i)
+            print(model_path)
             model = get_and_load_model(time_steps, model_path)
             # 根据时间步修改测试集shape
-            x_test_time_step = None
             if model_name == 'NN':
                 x_test_time_step = Rectify(x_test, time_steps)
             else:
