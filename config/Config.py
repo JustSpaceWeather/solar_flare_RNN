@@ -22,7 +22,9 @@ class TrainConfig(object):
         self.score_metrics = ['acc']  # , TP, TN
         self.epoch = 100
         self.batch_size = 64
-        self.time_steps_list = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]  # 1, 10, 12, 15, 20, 24, 30, 40, 60, 120
+        self.time_steps_list_120 = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]
+        self.time_steps_list_40 = [1, 2, 5, 10, 20, 40]
+        self.time_steps_list = self.time_steps_list_120
         self.verbose = 1  # 0不显示结果和进度条，1显示结果和进度条，2只显示结果不显示进度条
 
 
@@ -71,11 +73,11 @@ class File2022Config(object):
         self.test_file = p + '/data/20200412_2022/test'
 
 
-def File202240Config(object):
+class File202240Config(object):
     def __init__(self, p):
-        self.train_file = p + '/data/20220418_40/train'
-        self.valid_file = p + '/data/20220418_40/valid'
-        self.test_file = p + '/data/20220418_40/test'
+        self.train_file = p + '/data/20220418_202240/train'
+        self.valid_file = p + '/data/20220418_202240/valid'
+        self.test_file = p + '/data/20220418_202240/test'
 
 
 class DetectConfig(object):

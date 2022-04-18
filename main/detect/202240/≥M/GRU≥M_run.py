@@ -5,7 +5,7 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirn
 sys.path.append(p)
 
 from common.detect_common.GRU_run import GRU
-from config.Config import TTFileConfig
+from config.Config import File202240Config
 
-file_config = TTFileConfig(p)
-GRU(p, file_config, 'TVT', 'M')
+file_config = File202240Config(p)
+GRU(p, file_config, '202240', 'M')

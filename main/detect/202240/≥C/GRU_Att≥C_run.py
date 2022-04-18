@@ -5,7 +5,7 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirn
 sys.path.append(p)
 
 from common.detect_common.GRU_Att_run import GRU_Att
-from config.Config import TTFileConfig
+from config.Config import File202240Config
 
-file_config = TTFileConfig(p)
-GRU_Att(p, file_config, '2022', 'C')
+file_config = File202240Config(p)
+GRU_Att(p, file_config, '202240', 'C')

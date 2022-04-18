@@ -5,7 +5,7 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirn
 sys.path.append(p)
 
 from common.detect_common.BLSTM_run import BLSTM
-from config.Config import TTFileConfig
+from config.Config import File202240Config
 
-file_config = TTFileConfig(p)
-BLSTM(p, file_config, '2022', 'C')
+file_config = File202240Config(p)
+BLSTM(p, file_config, '202240', 'C')
