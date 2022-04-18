@@ -8,4 +8,4 @@ from common.detect_common.GRU_Att_run import GRU_Att
 from config.Config import TTFileConfig
 
 file_config = TTFileConfig(p)
-GRU_Att(p, file_config, 'TVT', 'M')
+GRU_Att(p, file_config, 'TT', 'C')
