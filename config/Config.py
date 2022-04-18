@@ -74,6 +74,10 @@ class File2022Config(object):
 
 
 class File202240Config(object):
+    """
+    20200412_2022降采样到40的train_valid_test文件位置
+    """
+
     def __init__(self, p):
         self.train_file = p + '/data/20220418_202240/train'
         self.valid_file = p + '/data/20220418_202240/valid'
