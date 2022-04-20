@@ -81,7 +81,8 @@ class File202240Config(object):
     def __init__(self, p):
         self.train_file = p + '/data/20220418_202240/train'
         self.valid_file = p + '/data/20220418_202240/valid'
-        self.test_file = p + '/data/20220418_202240/test'
+        self.test_file = p + '/data/20220418_202240/valid'
+        # self.test_file = p + '/data/20220418_202240/test'
 
 
 class DetectConfig(object):
@@ -90,5 +91,7 @@ class DetectConfig(object):
     """
 
     def __init__(self):
-        self.time_steps_list = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]
+        self.time_steps_list_40 = [1, 2, 5, 10, 20, 40]
+        self.time_steps_list_120 = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]
+        self.time_steps_list = self.time_steps_list_40
         self.score_metrics = []

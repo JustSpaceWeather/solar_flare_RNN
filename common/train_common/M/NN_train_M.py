@@ -25,6 +25,7 @@ def NN_M_train(p: str, file_config, train_type: str) -> None:
 
     model_save_path = p + '/weights/' + train_type + '/NN_best≥M_time_steps=' + str(time_steps)
     for i in range(10):
+        set_seed()
         (x_train, y_train, train_weight_dir), (x_valid, y_valid, valid_weight_dir) = load_data_M(train_list[i],
                                                                                                  valid_list[i])
         model = get_NN_model(

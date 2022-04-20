@@ -16,13 +16,13 @@ def NN_C_train(p: str, file_config, train_type: str) -> None:
     :param train_type: TT, TVT, 2018, 2022
     """
     train_config = TrainConfig()
-    set_seed()
     time_steps = 1
     train_list = load_data_list(file_config.train_file)
     valid_list = load_data_list(file_config.valid_file)
     best_TSS_list = []  # 保存每个训练集的最好的TSS
     model_save_path = p + '/weights/' + train_type + '/NN_best≥C_time_steps=' + str(time_steps)
     for i in range(10):
+        set_seed()
         (x_train, y_train, train_weight_dir), (x_valid, y_valid, valid_weight_dir) = load_data_C(train_list[i],
                                                                                                  valid_list[i])
         model = get_NN_model(

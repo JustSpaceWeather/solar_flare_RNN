@@ -18,7 +18,6 @@ def Bi_LSTM_C_train(p: str, file_config, train_type: str):
     """
     # 训练参数
     train_config = TrainConfig()
-    set_seed()
 
     train_list = load_data_list(file_config.train_file)
     valid_list = load_data_list(file_config.valid_file)
@@ -29,6 +28,7 @@ def Bi_LSTM_C_train(p: str, file_config, train_type: str):
         best_TSS_list = []  # 保存每个训练集的最好的TSS
         model_save_path = p + '/weights/' + train_type + '/Bi_LSTM_best≥C/time_steps=' + str(time_steps)
         for i in range(len(train_list)):
+            set_seed()
             (x_train, y_train, train_weight_dir), (x_valid, y_valid, valid_weight_dir) = load_data_C(train_list[i],
                                                                                                      valid_list[i])
             x_train = x_train.reshape(-1, time_steps, 10)
