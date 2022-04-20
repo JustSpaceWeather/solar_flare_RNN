@@ -24,7 +24,7 @@ class TrainConfig(object):
         self.batch_size = 64
         self.time_steps_list_120 = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]
         self.time_steps_list_40 = [1, 2, 5, 10, 20, 40]
-        self.time_steps_list = self.time_steps_list_120
+        self.time_steps_list = self.time_steps_list_40
         self.verbose = 1  # 0不显示结果和进度条，1显示结果和进度条，2只显示结果不显示进度条
 
 

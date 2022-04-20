@@ -16,7 +16,7 @@ from common.train_common.C.Bi_GRU_attention_train_C import Bi_GRU_attention_C_tr
 
 file_config = File202240Config(p)
 
-NN_C_train(p, file_config, '202240')
+# NN_C_train(p, file_config, '202240')
 LSTM_C_train(p, file_config, '202240')
 LSTM_attention_C_train(p, file_config, '202240')
 # LSTM_attention2_C_train(p, file_config, '202240')

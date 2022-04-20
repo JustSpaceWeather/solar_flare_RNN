@@ -21,6 +21,7 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_and_loa
     detect_config = DetectConfig()
     test_list = load_data_list(file_config.test_file)
     for time_steps in detect_config.time_steps_list:
+        print(time_steps)
         all_metric = {
             "Recall": [0, 0],
             "Precision": [0, 0],
@@ -35,21 +36,20 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_and_loa
         for i in range(10):  # 循环10-Fold文件
             all_nums += 1
             x_test, y_test, test_weight_dir = None, None, None
-            model_path = None
             if class_type == 'C':
                 x_test, y_test, test_weight_dir = load_train_or_test_C(test_list[i])
-                model_path = get_model_path(p, detect_type, class_type, model_name, time_steps, 1)
             elif class_type == 'M':
                 x_test, y_test, test_weight_dir = load_train_or_test_M(test_list[i])
-                model_path = get_model_path(p, detect_type, class_type, model_name, time_steps, i)
             # 载入模型
-            print(model_path)
-            model = get_and_load_model(time_steps, model_path)
             # 根据时间步修改测试集shape
             if model_name == 'NN':
                 x_test_time_step = Rectify(x_test, time_steps)
+                model_path = get_model_path(p, detect_type, class_type, model_name, 1, i)
             else:
                 x_test_time_step = x_test.reshape(-1, time_steps, 10)
+                model_path = get_model_path(p, detect_type, class_type, model_name, time_steps, i)
+            # print(model_path)
+            model = get_and_load_model(time_steps, model_path)
             y_test_time_step = Rectify(y_test, time_steps)
             # 开始预测
             y_true = y_test_time_step.argmax(axis=1)

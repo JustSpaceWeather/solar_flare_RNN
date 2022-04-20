@@ -71,7 +71,7 @@ def Bi_GRU_M_train(p: str, file_config, train_type: str):
                 )
                 loss_list.append(history.history['loss'])
                 val_loss_list.append(history.history['val_loss'])
-                print('==================Bi_LSTM_attention_train_M.py====================')
+                print('==================Bi_GRU_train_M.py====================')
             save_loss(
                 loss_list, val_loss_list, train_config.epoch,
                 model_save_path + '/Bi_GRU_M_' + str(time_steps) + '_best_' + str(i) + '.jpg',
