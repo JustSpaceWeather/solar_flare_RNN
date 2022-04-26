@@ -1,11 +1,11 @@
+import keras
 import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras.initializers import glorot_normal
-from tensorflow.keras.layers import InputLayer, LSTM, Dropout, BatchNormalization
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.optimizers import Adam
+from keras.initializers import glorot_normal
+from keras.layers import InputLayer, LSTM, Dropout, BatchNormalization
+from keras.models import Sequential
+from keras.optimizers import Adam
 
-from common.model_common.common_tf_model import common_NN
+from common.model_common.common_model import common_NN
 from layer.attention2 import Attention
 
 
@@ -13,7 +13,8 @@ def get_LSTM_attention_model(time_steps,
                              learning_rate: float,
                              dropout_rate: float,
                              seed: int,
-                             score_metrics: list):
+                             score_metrics: list,
+                             feature_size=10):
     """
     获得编译好的 lstm 多对一注意力机制 模型
     :param time_steps: 时间步
@@ -22,6 +23,7 @@ def get_LSTM_attention_model(time_steps,
     :param seed: 随机数种子  Glorot正态分布初始化方法和Dropout
     :param score_metrics: 评价指标
     :return: 编译好的 lstm 多头注意力机制 模型
+    :param feature_size: 特征维度
     """
     keras.initializers.he_normal(521)
     model = Sequential(

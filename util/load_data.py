@@ -15,7 +15,7 @@ def load_data_list(dir_path):
     files = os.listdir(dir_path)
     for i in range(len(files)):
         if files[i].endswith('.csv'):
-            files[i] = dir_path + '\\' + files[i]
+            files[i] = dir_path + '/' + files[i]
             data_list.append(files[i])
     return data_list
 
@@ -62,6 +62,7 @@ def load_train_or_test(filepath, class_1: list, class_2: list):
             class_list.append(1)
             class_2_num += 1
     data_list.append(np_utils.to_categorical(class_list, num_classes=2))  # 将class_list转化为one_hot形式
+    print('num class1',class_1_num,'num class2', class_2_num)
 
     return data_list[0], data_list[1], get_weight_dir([class_1_num, class_2_num])
 

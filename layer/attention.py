@@ -66,17 +66,12 @@ class Attention(Layer):
             self.b = None
         self.built = True
 
-    def compute_mask(self, input_data, input_mask=None):
-        # do not pass the mask to the next layers
-        return None
-
-    def call(self, x, mask=None):
+    def call(self, inputs, mask=None):
         features_dim = self.features_dim
         step_dim = self.step_dim
-        # e = K.dot(x, self.W)
         e = K.reshape(
             K.dot(
-                K.reshape(x, (-1, features_dim)),
+                K.reshape(inputs, (-1, features_dim)),
                 K.reshape(self.W, (features_dim, 1))
             ),
             (-1, step_dim)
@@ -85,15 +80,9 @@ class Attention(Layer):
             e += self.b
         e = K.tanh(e)
         a = K.exp(e)
-        # apply mask after the exp. will be re-normalized next
-        if mask is not None:
-            # cast the mask to floatX to avoid float64 upcasting in theano
-            a *= K.cast(mask, K.floatx())
-        # in some cases especially in the early stages of training the sum may be almost zero
-        # and this results in NaN's. A workaround is to add a very small positive number ε to the sum.
         a /= K.cast(K.sum(a, axis=1, keepdims=True) + K.epsilon(), K.floatx())
         a = K.expand_dims(a)
-        c = K.sum(a * x, axis=1)
+        c = K.sum(a * inputs, axis=1)
         return c
 
     def compute_output_shape(self, input_shape):

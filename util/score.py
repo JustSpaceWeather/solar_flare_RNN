@@ -1,14 +1,8 @@
-import tensorflow as tf
 from keras import Model
 from keras import backend as K
+from sklearn.metrics import brier_score_loss
 
 from util.scoreClass import Metric
-
-# a = tf.constant([2, 8])  # 定义tensor常量
-# b = K.square(a)
-# with tf.Session() as sess:
-#     print(type(sess.run(b)))
-#     print(sess.run(b))
 
 
 def BSS(y_true, y_pred):

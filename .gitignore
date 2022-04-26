@@ -1,4 +1,5 @@
 /data/
+/test/
 /__pycache__/
 *.pyc
 /weights/

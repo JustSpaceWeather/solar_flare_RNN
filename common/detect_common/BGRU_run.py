@@ -1,6 +1,7 @@
 from common.detect_common.detect import detect
 from config.Config import TrainConfig
 from model.Bi_GRU_model import get_Bi_GRU_model
+from common.detect_common.same.detect_same import detect_same
 
 
 def get_and_load_model(time_steps, model_path):
@@ -24,3 +25,4 @@ def BGRU(p, file_config, detect_type, class_type: str) -> None:
     :param class_type: 分类类型  C  M
     """
     detect(p, file_config, detect_type, class_type, 'Bi_GRU', get_and_load_model)
+    # detect_same(p, file_config, detect_type, class_type, 'Bi_GRU', get_and_load_model)

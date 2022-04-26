@@ -1,5 +1,5 @@
-import keras.backend as K
 import numpy as np
+from keras import backend as K
 
 from config.Config import DetectConfig
 from util.get_model_path import get_model_path
@@ -8,8 +8,25 @@ from util.load_data import load_data_list
 from util.load_data import load_train_or_test_C, load_train_or_test_M
 from util.scoreClass import Metric
 
+data_dir = {
+    1: 40,
+    2: 20,
+    5: 8,
+    10: 4,
+    20: 2,
+    40: 1
+}
 
-def detect(p, file_config, detect_type, class_type: str, model_name, get_and_load_model) -> None:
+
+def changShape(data, time_steps):
+    temp_data = []
+    for i in range(0, data.shape[0], data_dir[time_steps]):
+        temp_data.append(data[i])
+    data = np.array(temp_data)
+    return data
+
+
+def detect_same(p, file_config, detect_type, class_type: str, model_name, get_and_load_model) -> None:
     """
     :param p: 项目根目录地址
     :param file_config: 训练文件配置类对象
@@ -34,7 +51,6 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_and_loa
         data_Recall, data_Precision, data_Accuracy, data_TSS, data_HSS, data_FAR = [], [], [], [], [], []
         all_nums = 0
         for i in range(10):  # 循环10-Fold文件
-            print(test_list[i])
             all_nums += 1
             x_test, y_test, test_weight_dir = None, None, None
             if class_type == 'C':
@@ -50,11 +66,16 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_and_loa
                 x_test_time_step = x_test.reshape(-1, time_steps, 10)
                 model_path = get_model_path(p, detect_type, class_type, model_name, time_steps, i)
             # print(model_path)
+            # print(test_list[i])
             model = get_and_load_model(time_steps, model_path)
             y_test_time_step = Rectify(y_test, time_steps)
             # 开始预测
             y_true = y_test_time_step.argmax(axis=1)
             y_pred = model.predict(x_test_time_step).argmax(axis=1)
+            y_true = changShape(y_true, time_steps)
+            y_pred = changShape(y_pred, time_steps)
+            # print(y_true)
+            # print(y_pred)
             # 指标输出
             metric = Metric(y_true, y_pred)
             # print("Matrix:/n", metric.Matrix())

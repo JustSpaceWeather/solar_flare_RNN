@@ -1,4 +1,5 @@
 from common.detect_common.detect import detect
+from common.detect_common.same.detect_same import detect_same
 from config.Config import TrainConfig
 from model.LSTM_model import get_LSTM_model
 
@@ -24,3 +25,4 @@ def LSTM(p, file_config, detect_type, class_type: str) -> None:
     :param class_type: 分类类型  C  M
     """
     detect(p, file_config, detect_type, class_type, 'LSTM', get_and_load_model)
+    # detect_same(p, file_config, detect_type, class_type, 'LSTM', get_and_load_model)
