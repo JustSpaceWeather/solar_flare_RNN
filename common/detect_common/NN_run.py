@@ -5,12 +5,8 @@ from model.NN_model import get_NN_model
 
 def get_and_load_model(time_steps, model_path):
     train_config = TrainConfig()
-    model = get_NN_model(
-        learning_rate=train_config.learning_rate,
-        dropout_rate=0.0,
-        seed=train_config.glorot_normal_seed,
-        score_metrics=train_config.score_metrics
-    )
+    model = get_NN_model(learning_rate=train_config.learning_rate, dropout_rate=0.0,
+                         seed=train_config.glorot_normal_seed, score_metrics=train_config.score_metrics)
     model.load_weights(model_path)
     return model
 

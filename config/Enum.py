@@ -11,18 +11,22 @@ class FeatureEnum(object):
         self.R_VALUE = 'R_VALUE'
         self.SHRGT45 = 'SHRGT45'
 
+        self.all_feature_list = [self.TOTUSJH]
+        # self.TOTUSJH, self.TOTPOT, self.TOTUSJZ, self.ABSNJZH, self.SAVNCPP,self.USFLUX,
+        # self.AREA_ACR, self.MEANPOT, self.R_VALUE, self.SHRGT45
+
 
 class ModelType(object):
     def __init__(self):
         self.NN = "NN"
-        # 下面是LSTM模型名称
+        # 下面是LSTM系列模型名称
         self.LSTM = "LSTM"
         self.LSTM_attention = "LSTM_attention"
         self.LSTM_attention2 = "LSTM_attention2"
         self.Bi_LSTM = "Bi_LSTM"
         self.Bi_LSTM_attention = "Bi_LSTM_attention"
         self.Bi_LSTM_attention2 = "Bi_LSTM_attention2"
-        # 下面是GRU模型名称
+        # 下面是GRU系列模型名称
         self.GRU = "GRU"
         self.GRU_attention = "GRU_attention"
         self.GRU_attention2 = "GRU_attention2"

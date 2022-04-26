@@ -20,7 +20,7 @@ class TrainConfig(object):
         self.dropout_rate = 0.5
         self.glorot_normal_seed = 369
         self.score_metrics = ['acc']  # , TP, TN
-        self.epoch = 1
+        self.epoch = 50
         self.batch_size = 64
         self.time_steps_list_120 = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]
         self.time_steps_list_40 = [40]  # 1, 2, 5, 10, 20,

@@ -28,7 +28,7 @@ def get_LSTM_attention_model(time_steps,
     keras.initializers.he_normal(521)
     model = Sequential(
         [
-            InputLayer(input_shape=(time_steps, 10)),
+            InputLayer(input_shape=(time_steps, feature_size)),
             # 第一层LSTM
             LSTM(
                 units=256,
