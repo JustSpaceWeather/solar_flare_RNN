@@ -93,24 +93,5 @@ class File202240Config(object):
     def __init__(self, p):
         self.train_file = p + '/data/20220418_202240/train'
         self.valid_file = p + '/data/20220418_202240/valid'
-        # self.test_file = p + '/data/20220418_202240/test'
-        self.test_file = p + '/data/20220418_202240/valid'
-
-
-class ModelType(object):
-    def __init__(self):
-        self.NN = "NN"
-        # 下面是LSTM模型名称
-        self.LSTM = "LSTM"
-        self.Bi_LSTM = "Bi_LSTM"
-        self.LSTM_attention = "LSTM_attention"
-        self.LSTM_attention2 = "LSTM_attention2"
-        self.Bi_LSTM_attention = "Bi_LSTM_attention"
-        self.Bi_LSTM_attention2 = "Bi_LSTM_attention2"
-        # 下面是GRU模型名称
-        self.GRU = "GRU"
-        self.Bi_GRU = "Bi_GRU"
-        self.GRU_attention = "GRU_attention"
-        self.GRU_attention2 = "GRU_attention2"
-        self.Bi_GRU_attention = "Bi_GRU_attention"
-        self.Bi_GRU_attention2 = "Bi_GRU_attention2"
+        self.test_file = p + '/data/20220418_202240/test'
+        # self.test_file = p + '/data/20220418_202240/valid'

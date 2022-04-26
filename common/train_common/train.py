@@ -1,5 +1,5 @@
 from common.train_common.train_common import train
-from config.Config import ModelType
+from config.Enum import ModelType
 from model.Bi_GRU_attention2_model import get_Bi_GRU_attention_model as get_Bi_GRU_attention2_model
 from model.Bi_GRU_attention_model import get_Bi_GRU_attention_model
 from model.Bi_GRU_model import get_Bi_GRU_model
