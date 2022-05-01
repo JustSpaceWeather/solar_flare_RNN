@@ -33,7 +33,7 @@ def train(p: str, file_config, data_type: str, model_name, class_type, get_model
         is_new = True
         best_TSS_list = []  # 保存每个训练集的最好的TSS
         if model_name == 'NN':
-            model_save_path = p + '/weights/' + data_type + '/NN_best≥C_time_steps=' + str(time_steps)
+            model_save_path = p + '/weights/' + data_type + '/NN_best≥' + class_type + '_time_steps=' + str(time_steps)
         else:
             model_save_path = p + '/weights/' + data_type + '/' + model_name + '_best≥' + class_type + '/time_steps=' + str(
                 time_steps)

@@ -1,4 +1,4 @@
-from common.feature_common.feature_common import train
+from common.feature_common.feature_train_common import train
 from config.Enum import FeatureEnum
 from config.Enum import ModelType
 from model.Bi_GRU_attention2_model import get_Bi_GRU_attention_model as get_Bi_GRU_attention2_model

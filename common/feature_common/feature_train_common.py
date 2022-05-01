@@ -9,7 +9,6 @@ from util.load_data import load_data_C, load_data_M
 from util.load_data import load_data_list
 from util.score import show_score_and_save_weights
 from util.set_seed import set_seed
-from util.show_pic_util import save_loss
 
 
 def train(p: str, file_config, data_type: str, model_name, class_type, get_model, feature_name) -> None:
@@ -31,17 +30,16 @@ def train(p: str, file_config, data_type: str, model_name, class_type, get_model
     else:
         time_steps_list = train_config.time_steps_list
     for time_steps in time_steps_list:
-        is_new = True
         best_TSS_list = []  # 保存每个训练集的最好的TSS
         if model_name == 'NN':
-            model_save_path = p + '/weights/' + data_type + '/NN_best≥C_time_steps=' + str(
+            model_save_path = p + '/weights/feature_impotence/' + data_type + '/NN_best≥' + class_type + '_time_steps=' + str(
                 time_steps) + '/' + feature_name
         else:
-            model_save_path = p + '/weights/' + data_type + '/' + model_name + '_best≥' + class_type + '/time_steps=' + str(
+            model_save_path = p + '/weights/feature_impotence/' + data_type + '/' + model_name + '_best≥' + class_type + '/time_steps=' + str(
                 time_steps) + '/' + feature_name
         if not os.path.exists(model_save_path):
             os.makedirs(model_save_path)
-        for i in range(1):  # len(train_list)
+        for i in range(len(train_list)):
             # 设置随机数种子，方便复现结果
             set_seed()
             # 导入训练数据
@@ -103,12 +101,6 @@ def train(p: str, file_config, data_type: str, model_name, class_type, get_model
                 loss_list.append(history.history['loss'])
                 val_loss_list.append(history.history['val_loss'])
                 print('===============' + model_name + ':' + feature_name + ' end================')
-            if class_type == 'NN':
-                img_path = model_save_path + '/' + model_name + '_' + class_type + '_best_' + str(i) + '.jpg'
-            else:
-                img_path = model_save_path + '/' + model_name + '_' + class_type + '_' + str(
-                    time_steps) + '_best_' + str(i) + '.jpg'
-            is_new = False
             best_TSS_list.append(best_TSS)
             K.clear_session()
         # 全部训练完成后，打印所有权重的指标

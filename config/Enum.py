@@ -11,7 +11,8 @@ class FeatureEnum(object):
         self.R_VALUE = 'R_VALUE'
         self.SHRGT45 = 'SHRGT45'
 
-        self.all_feature_list = [self.TOTUSJH]
+        self.all_feature_list = [self.TOTUSJH, self.TOTPOT, self.TOTUSJZ, self.ABSNJZH, self.SAVNCPP,
+                                 self.USFLUX, self.AREA_ACR, self.MEANPOT, self.R_VALUE, self.SHRGT45]
         # self.TOTUSJH, self.TOTPOT, self.TOTUSJZ, self.ABSNJZH, self.SAVNCPP,self.USFLUX,
         # self.AREA_ACR, self.MEANPOT, self.R_VALUE, self.SHRGT45
 

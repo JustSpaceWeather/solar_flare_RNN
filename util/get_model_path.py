@@ -9,13 +9,15 @@ def get_model_path(p, data_type, class_type, model_name, time_steps, index):
 
 
 def get_one_feature_model_path(p, data_type, class_type, model_name, time_steps, index, feature_name):
+    path = p + '/weights/feature_impotence/' + data_type
     if model_name == 'NN':
-        return p + '/weights/' + data_type + '/NN_best≥C_time_steps=' + str(
+        path = path + '/NN_best≥' + class_type + '_time_steps=' + str(
             time_steps) + '/' + feature_name + '/NN_' + class_type + '_' + feature_name + '_best_' + str(index) + '.h5'
     else:
-        return p + '/weights/' + data_type + '/' + model_name + '_best≥' + class_type + '/time_steps=' + str(
+        path = path + '/' + model_name + '_best≥' + class_type + '/time_steps=' + str(
             time_steps) + '/' + feature_name + '/' + model_name + '_' + class_type + '_' + str(
             time_steps) + '_' + feature_name + '_best_' + str(index) + '.h5'
+    return path
 
 
 # NN

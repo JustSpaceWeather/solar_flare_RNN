@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.metrics import confusion_matrix
 
 
+# sys.float_info.epsilon用在分母上，无实际意义，仅用于防止分母为0报错
 class Metric(object):
     def __init__(self, y_true, y_pred):
         self.__matrix = confusion_matrix(y_true, y_pred)
@@ -27,13 +28,13 @@ class Metric(object):
         fn = self.__matrix.sum(axis=1) - np.diag(self.__matrix)
         return fn.astype(float)
 
-    def TPRate(self):
+    def TPRate(self):  # TPR
         return self.TP() / (self.TP() + self.FN() + sys.float_info.epsilon)
 
     def TNRate(self):
         return self.TN() / (self.TN() + self.FP() + sys.float_info.epsilon)
 
-    def FPRate(self):
+    def FPRate(self):  # FPR
         return 1 - self.TNRate()
 
     def FNRate(self):
@@ -43,6 +44,10 @@ class Metric(object):
         ALL = self.TP() + self.FP() + self.TN() + self.FN()
         RIGHT = self.TP() + self.TN()
         return RIGHT / (ALL + sys.float_info.epsilon)
+
+    def BACC(self):  # Balanced Accuracy
+        return ((self.TP() / (self.TP() + self.FN() + sys.float_info.epsilon)) + (
+                    self.TN() / (self.TN() + self.FP() + sys.float_info.epsilon))) / 2.0
 
     def Recall(self):
         return self.TP() / (self.TP() + self.FN() + sys.float_info.epsilon)
@@ -60,7 +65,7 @@ class Metric(object):
         below = P * (self.FN() + self.TN()) + N * (self.TP() + self.FP())
         return up / (below + sys.float_info.epsilon)
 
-    def FAR(self):
+    def FAR(self):  # false alarm ratio 空报率
         return self.FP() / (self.FP() + self.TP() + sys.float_info.epsilon)
 
     def POD(self):

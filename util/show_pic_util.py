@@ -11,3 +11,4 @@ def save_loss(loss_list, val_loss_list, epoch, file_path, new_figure: bool):
     # plt.legend(loc='upper right')
     plt.title('Train and Val Loss')
     plt.savefig(file_path)
+
