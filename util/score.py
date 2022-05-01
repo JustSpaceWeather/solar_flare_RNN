@@ -1,14 +1,26 @@
+import numpy as np
 from keras import Model
-from keras import backend as K
 from sklearn.metrics import brier_score_loss
 
 from util.scoreClass import Metric
 
 
-def BSS(y_true, y_pred):
-    BS = K.mean(K.square(y_true - y_pred), axis=0)[1]  # 每一行的差的平方的平均值
-    y_ave = K.mean(y_true, axis=0)
-    return 1 - BS / (K.mean(K.square(y_true - y_ave), axis=0)[1] + K.epsilon())
+def BS_BSS_score(y_true, y_prob):
+    """
+    :param y_true: one_hot格式
+    :param y_prob: softmax输出的(m, 2)形状的
+    :return: BS和BSS的值
+    y_true = y_test.argmax(axis=1)
+    y_prob = model.predict(x_test_time_step)[:, 1]
+    """
+    # BSS开始计算
+    BS = brier_score_loss(y_true, y_prob)
+    y_mean = y_prob.mean()
+    temp = y_true - y_mean
+    temp = np.square(temp)
+    temp = np.sum(temp) / float(len(y_true))
+    BSS = 1 - BS / temp
+    return BS, BSS
 
 
 def show_score_and_save_weights(model: Model, best_TSS, y_true, y_pred, filename) -> float:
@@ -35,3 +47,7 @@ def show_score_and_save_weights(model: Model, best_TSS, y_true, y_pred, filename
         best_TSS = new_TSS
         model.save_weights(filename)
     return best_TSS
+
+
+def show_score(y_true, y_pred, model):
+    pass

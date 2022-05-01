@@ -7,6 +7,7 @@ from util.get_model_path import get_model_path
 from util.load_data import Rectify
 from util.load_data import load_data_list
 from util.load_data import load_train_or_test_C, load_train_or_test_M
+from util.score import BS_BSS_score
 from util.scoreClass import Metric
 
 
@@ -34,6 +35,8 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_model) 
         }
         all_matrix = np.array([[0, 0], [0, 0]])
         data_Recall, data_Precision, data_Accuracy, data_TSS, data_HSS, data_FAR = [], [], [], [], [], []
+        BS_all = []
+        BSS_all = []
         all_nums = 0
         for i in range(10):  # 循环10-Fold文件
             all_nums += 1
@@ -64,15 +67,24 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_model) 
             y_true = y_test_time_step.argmax(axis=1)
             y_prob = model.predict(x_test_time_step)
             y_pred = y_prob.argmax(axis=1)
+            y_prob = y_prob[:, 1]
+            # BSS开始计算
+            BS, BSS = BS_BSS_score(y_true, y_prob)
+            BS_all.append(BS)
+            BSS_all.append(BSS)
             # 指标输出
             metric = Metric(y_true, y_pred)
-            # print("Matrix:/n", metric.Matrix())
-            print(metric.Recall())
-            print(metric.Precision())
-            print(metric.Accuracy())
-            print(metric.TSS())
-            print(metric.HSS())
-            print(metric.FAR())
+            # print(metric.Matrix())
+            # print(metric.Matrix()[0][0],metric.Matrix()[0][1])
+            # print(metric.Matrix()[1][0],metric.Matrix()[1][1])
+            print(metric.Recall()[0])
+            print(metric.Precision()[0])
+            print(metric.Accuracy()[0])
+            print(metric.TSS()[0])
+            print(metric.HSS()[0])
+            print(metric.FAR()[0])
+            print(BS)
+            print(BSS)
             data_Recall.extend(metric.Recall())
             data_Precision.extend(metric.Precision())
             data_Accuracy.extend(metric.Accuracy())
@@ -86,12 +98,17 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_model) 
             all_metric["TSS"] += metric.TSS()
             all_metric["HSS"] += metric.HSS()
             all_metric["FAR"] += metric.FAR()
+        # print(all_matrix)
+        # print(all_matrix[0][0], all_matrix[0][1])
+        # print(all_matrix[1][0], all_matrix[1][1])
         data_TSS = np.array(data_TSS).reshape(10, 2)
         data_Precision = np.array(data_Precision).reshape(10, 2)
         data_Accuracy = np.array(data_Accuracy).reshape(10, 2)
         data_Recall = np.array(data_Recall).reshape(10, 2)
         data_FAR = np.array(data_FAR).reshape(10, 2)
         data_HSS = np.array(data_HSS).reshape(10, 2)
+        BS_all = np.array(BS_all)
+        BSS_all = np.array(BSS_all)
         print(data_Recall[:, 0].mean(), data_Recall[:, 1].mean())
         print(data_Recall[:, 0].std(), data_Recall[:, 1].std())
         print(data_TSS[:, 0].mean(), data_TSS[:, 1].mean())
@@ -104,5 +121,9 @@ def detect(p, file_config, detect_type, class_type: str, model_name, get_model) 
         print(data_Precision[:, 0].std(), data_Precision[:, 1].std())
         print(data_FAR[:, 0].mean(), data_FAR[:, 1].mean())
         print(data_FAR[:, 0].std(), data_FAR[:, 1].std())
+        print(BS_all.mean())
+        print(BS_all.std())
+        print(BSS_all.mean())
+        print(BSS_all.std())
         print("==================================")
         K.clear_session()
