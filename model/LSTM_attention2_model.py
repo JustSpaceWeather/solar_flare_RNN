@@ -6,7 +6,7 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 
 from common.model_common.common_model import common_NN
-from layer.attention2 import Attention
+from layer.many_to_one_attention import ManyToOneAttention
 
 
 def get_LSTM_attention_model(time_steps,
@@ -40,7 +40,8 @@ def get_LSTM_attention_model(time_steps,
             Dropout(dropout_rate, seed=seed),
             BatchNormalization(),
             # 第二层Attention
-            Attention(),
+            ManyToOneAttention(),
+            BatchNormalization()
         ] + common_NN(dropout_rate, seed)
     )
     adam = Adam(learning_rate)

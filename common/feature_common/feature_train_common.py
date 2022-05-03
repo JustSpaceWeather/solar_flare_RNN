@@ -28,7 +28,7 @@ def train(p: str, file_config, data_type: str, model_name, class_type, get_model
     if model_name == 'NN':
         time_steps_list = [1]
     else:
-        time_steps_list = train_config.time_steps_list
+        time_steps_list = [40]
     for time_steps in time_steps_list:
         best_TSS_list = []  # 保存每个训练集的最好的TSS
         if model_name == 'NN':

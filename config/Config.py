@@ -23,7 +23,7 @@ class TrainConfig(object):
         self.epoch = 50
         self.batch_size = 64
         self.time_steps_list_120 = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]
-        self.time_steps_list_40 = [40]  # 1, 2, 5, 10, 20,
+        self.time_steps_list_40 = [1, 2, 5, 10, 20, 40]  # 1, 2, 5, 10, 20, 40
         self.time_steps_list = self.time_steps_list_40
         self.verbose = 1  # 0不显示结果和进度条，1显示结果和进度条，2只显示结果不显示进度条
 
@@ -34,7 +34,7 @@ class DetectConfig(object):
     """
 
     def __init__(self):
-        self.time_steps_list_40 = [40]  # 1, 2, 5, 10, 20, 40
+        self.time_steps_list_40 = [1, 2, 5, 10, 20, 40]  # 1, 2, 5, 10, 20, 40
         self.time_steps_list_120 = [1, 10, 12, 15, 20, 24, 30, 40, 60, 120]
         self.time_steps_list = self.time_steps_list_40
         self.score_metrics = []
@@ -93,8 +93,8 @@ class File202240Config(object):
     def __init__(self, p):
         self.train_file = p + '/data/20220418_202240/train'
         # 参与训练的验证集
-        # self.valid_file = p + '/data/20220418_202240/valid'
-        self.valid_file = p + '/data/20220418_202240/test'
+        self.valid_file = p + '/data/20220418_202240/valid'
+        # self.valid_file = p + '/data/20220418_202240/test'
         # 不参与训练的测试集
         # self.test_file = p + '/data/20220418_202240/test'
         self.test_file = p + '/data/20220418_202240/valid'

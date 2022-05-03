@@ -3,24 +3,21 @@ from keras.layers import Dense, Lambda, Dot, Activation, Concatenate
 from keras.layers import Layer
 
 
-# KERAS_ATTENTION_DEBUG: If set to 1. Will switch to debug mode.
-# In debug mode, the class Attention is no longer a Keras layer.
-# What it means in practice is that we can have access to the internal values
-# of each tensor. If we don't use debug, Keras treats the object
-# as a layer and we can only get the final output.
-# debug_flag = int(os.environ.get('KERAS_ATTENTION_DEBUG', 0))
-
-
-class Attention(Layer):
-
+class ManyToOneAttention(Layer):
     def __init__(self, units=128, **kwargs):
+        super(ManyToOneAttention, self).__init__(**kwargs)
         self.units = units
-        super(Attention, self).__init__(**kwargs)
+        self.attention_score_vec = None
+        self.h_t = None
+        self.attention_score = None
+        self.attention_weight = None
+        self.context_vector = None
+        self.attention_output = None
+        self.attention_vector = None
 
-    # noinspection PyAttributeOutsideInit
     def build(self, input_shape):
         input_dim = int(input_shape[-1])
-        with K.name_scope(self.name):
+        with K.name_scope('attention'):
             self.attention_score_vec = Dense(input_dim, use_bias=False, name='attention_score_vec')
             self.h_t = Lambda(lambda x: x[:, -1, :], output_shape=(input_dim,), name='last_hidden_state')
             self.attention_score = Dot(axes=[1, 2], name='attention_score')
@@ -28,20 +25,15 @@ class Attention(Layer):
             self.context_vector = Dot(axes=[1, 1], name='context_vector')
             self.attention_output = Concatenate(name='attention_output')
             self.attention_vector = Dense(self.units, use_bias=False, activation='tanh', name='attention_vector')
-            super(Attention, self).build(input_shape)
 
     def compute_output_shape(self, input_shape):
         return input_shape[0], self.units
 
-    # noinspection PyUnusedLocal
+    def __call__(self, inputs, training=None, **kwargs):
+        return self.call(inputs, training, **kwargs)
+
     def call(self, inputs, training=None, **kwargs):
-        """
-        Many-to-one attention mechanism for Keras.
-        @param inputs: 3D tensor with shape (batch_size, time_steps, input_dim).
-        @param training: not used in this layer.
-        @return: 2D tensor with shape (batch_size, units)
-        @author: felixhao28, philipperemy.
-        """
+        self.build(inputs.shape)
         score_first_part = self.attention_score_vec(inputs)
         h_t = self.h_t(inputs)
         score = self.attention_score([h_t, score_first_part])
@@ -50,12 +42,3 @@ class Attention(Layer):
         pre_activation = self.attention_output([context_vector, h_t])
         attention_vector = self.attention_vector(pre_activation)
         return attention_vector
-
-    def get_config(self):
-        """
-        Returns the seed_config of a the layer. This is used for saving and loading from a model
-        :return: python dictionary with specs to rebuild layer
-        """
-        config = super(Attention, self).get_config()
-        config.update({'units': self.units})
-        return config

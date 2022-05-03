@@ -16,8 +16,12 @@ def BS_BSS_score(y_true, y_prob):
     # BSS开始计算
     BS = brier_score_loss(y_true, y_prob)
     y_mean = y_prob.mean()
+    # print(y_true)
+    # print(y_mean)
     temp = y_true - y_mean
+    # print(temp)
     temp = np.square(temp)
+    # print(temp)
     temp = np.sum(temp) / float(len(y_true))
     BSS = 1 - BS / temp
     return BS, BSS
@@ -49,5 +53,3 @@ def show_score_and_save_weights(model: Model, best_TSS, y_true, y_pred, filename
     return best_TSS
 
 
-def show_score(y_true, y_pred, model):
-    pass

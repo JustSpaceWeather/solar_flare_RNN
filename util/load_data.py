@@ -17,25 +17,8 @@ def load_data_list(dir_path):
         if files[i].endswith('.csv'):
             files[i] = dir_path + '/' + files[i]
             data_list.append(files[i])
+    data_list.sort()
     return data_list
-
-
-def load_data(train_path, test_path, class_1: list, class_2: list, feature_name=None):
-    """
-    :param train_path 训练数据文件的位置
-    :param test_path 测试数据文件的位置
-    :param feature_name: 特征名称
-    用于读取和生成训练数据和测试数据及对应数据的标签，数据标签为one_hot形式
-    :return 返回训练集和测试集x_train, y_train, x_test, y_test
-    """
-    return load_train_or_test(train_path, class_1, class_2, feature_name), load_train_or_test(test_path, class_1,
-                                                                                              class_2, feature_name)
-
-
-def load_one_feature_data(train_path, test_path, class_1: list, class_2: list, feature_name):
-    assert feature_name is not None
-    return load_train_or_test(train_path, class_1, class_2, feature_name), load_train_or_test(test_path, class_1,
-                                                                                              class_2, feature_name)
 
 
 def load_train_or_test(filepath, class_1: list, class_2: list, feature_name=None):
@@ -82,7 +65,25 @@ def load_train_or_test(filepath, class_1: list, class_2: list, feature_name=None
             class_2_num += 1
     data_list.append(np_utils.to_categorical(class_list, num_classes=2))  # 将class_list转化为one_hot形式
 
-    return data_list[0], data_list[1], get_weight_dir([class_1_num, class_2_num])
+    return data_list[0], data_list[1], get_weight_dir([class_1_num, class_2_num])  # x_train, y_train, weight
+
+
+def get_weight_dir(every_class_num_list: list):
+    """
+    根据每个类样本数获取每个类的权重
+    :param every_class_num_list:每个元素在类中的个数
+    :return:返回的对应元素的权重列表（和传入列表顺序一致）
+    """
+    all_samples = 0
+    num_classes = len(every_class_num_list)
+    for i in every_class_num_list:
+        all_samples += i
+    weight_dir = {}
+    index = 0
+    for i in every_class_num_list:
+        weight_dir[index] = all_samples / (i * num_classes)
+        index += 1
+    return weight_dir
 
 
 def load_train_or_test_C(path, feature_name=None):
@@ -109,6 +110,24 @@ def load_train_or_test_M(path, feature_name=None):
     return load_train_or_test(path, class_1, class_2, feature_name)
 
 
+def load_data(train_path, test_path, class_1: list, class_2: list, feature_name=None):
+    """
+    :param train_path 训练数据文件的位置
+    :param test_path 测试数据文件的位置
+    :param feature_name: 特征名称
+    用于读取和生成训练数据和测试数据及对应数据的标签，数据标签为one_hot形式
+    :return 返回训练集和测试集x_train, y_train, x_test, y_test
+    """
+    return load_train_or_test(train_path, class_1, class_2, feature_name), load_train_or_test(test_path, class_1,
+                                                                                              class_2, feature_name)
+
+
+def load_one_feature_data(train_path, test_path, class_1: list, class_2: list, feature_name):
+    assert feature_name is not None
+    return load_train_or_test(train_path, class_1, class_2, feature_name), load_train_or_test(test_path, class_1,
+                                                                                              class_2, feature_name)
+
+
 def load_data_C(train_path, test_path, feature_name=None):
     class_1 = ['N']
     class_2 = ['C', 'M', 'X']
@@ -119,24 +138,6 @@ def load_data_M(train_path, test_path, feature_name=None):
     class_1 = ['N', 'C']
     class_2 = ['M', 'X']
     return load_data(train_path, test_path, class_1, class_2, feature_name)
-
-
-def get_weight_dir(every_class_num_list: list):
-    """
-    根据每个类样本数获取每个类的权重
-    :param every_class_num_list:每个元素在类中的个数
-    :return:返回的对应元素的权重列表（和传入列表顺序一致）
-    """
-    all_samples = 0
-    num_classes = len(every_class_num_list)
-    for i in every_class_num_list:
-        all_samples += i
-    weight_dir = {}
-    index = 0
-    for i in every_class_num_list:
-        weight_dir[index] = all_samples / (i * num_classes)
-        index += 1
-    return weight_dir
 
 
 def Rectify(_y, time_steps):

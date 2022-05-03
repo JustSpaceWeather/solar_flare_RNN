@@ -1,12 +1,12 @@
 import keras
 import tensorflow as tf
 from keras.initializers import glorot_normal
-from keras.layers import InputLayer, Bidirectional, GRU
+from keras.layers import *
 from keras.models import Sequential
 from keras.optimizers import Adam
 
 from common.model_common.common_model import common_NN
-from layer.attention2 import Attention
+from layer.many_to_one_attention import ManyToOneAttention
 
 
 def get_Bi_GRU_attention_model(time_steps: int,
@@ -39,8 +39,11 @@ def get_Bi_GRU_attention_model(time_steps: int,
                     bias_initializer=tf.zeros_initializer()
                 ),
             ),
+            Dropout(dropout_rate, seed=seed),
+            BatchNormalization(),
             # 第二层Attention
-            Attention(time_steps),
+            ManyToOneAttention(),
+            BatchNormalization()
         ] + common_NN(dropout_rate, seed)
     )
     adam = Adam(learning_rate)
