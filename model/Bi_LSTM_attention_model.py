@@ -6,7 +6,7 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 
 from common.model_common.common_model import common_NN
-from layer.attention import Attention
+from layer.feed_forward_attention import Attention
 
 
 def get_Bi_LSTM_attention_model(time_steps,

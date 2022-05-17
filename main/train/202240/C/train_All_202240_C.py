@@ -11,7 +11,7 @@ file_config = File202240Config(p)
 # NN_train(p, file_config, '202240', 'C')
 # LSTM_train(p, file_config, '202240', 'C')
 # LSTM_attention_train(p, file_config, '202240', 'C')
-LSTM_attention2_train(p, file_config, '202240', 'C')
+LSTM_attention2_train(p, file_config, '202240', 'C')  # 毕设用的2
 # GRU_train(p, file_config, '202240', 'C')
 # GRU_attention_train(p, file_config, '202240', 'C')
 # GRU_attention2_train(p, file_config, '202240', 'C')

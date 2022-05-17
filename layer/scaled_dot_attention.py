@@ -1,8 +1,9 @@
 import keras
 from keras import backend as K
+from keras.layers import Layer
 
 
-class ScaledDotProductAttention(keras.layers.Layer):
+class ScaledDotProductAttention(Layer):
     r"""The attention layer that takes three inputs representing queries, keys and values.
     \text{Attention}(Q, K, V) = \text{softmax}(\frac{Q K^T}{\sqrt{d_k}}) V
     See: https://arxiv.org/pdf/1706.03762.pdf Attention Is All You Need

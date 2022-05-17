@@ -67,3 +67,15 @@ def load_data_cut_feature_M(train_path, test_path, feature_cut_list):
     class_1 = ['N', 'C']
     class_2 = ['M', 'X']
     return load_data_feature_cut(train_path, test_path, class_1, class_2, feature_cut_list)
+
+
+def load_train_or_test_cut_feature_C(file_path, feature_cut_list):
+    class_1 = ['N']
+    class_2 = ['C', 'M', 'X']
+    return load_train_or_test_cut_feature(file_path, class_1, class_2, feature_cut_list)
+
+
+def load_train_or_test_cut_feature_M(file_path, feature_cut_list):
+    class_1 = ['N', 'C']
+    class_2 = ['M', 'X']
+    return load_train_or_test_cut_feature(file_path, class_1, class_2, feature_cut_list)

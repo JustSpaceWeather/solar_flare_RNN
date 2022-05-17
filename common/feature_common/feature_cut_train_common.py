@@ -3,7 +3,6 @@ import os
 import keras.backend as K
 
 from config.Config import TrainConfig
-from util.get_model_path import get_model_path
 from util.load_data import Rectify
 from util.load_data import load_data_list
 from util.load_data_feature_cut import load_data_cut_feature_C, load_data_cut_feature_M
@@ -90,9 +89,9 @@ def train(p: str, file_config, data_type: str, model_name, class_type, get_model
                 y_pred = model.predict(x_valid, batch_size=train_config.batch_size).argmax(axis=1)  # 将数据传入，得到预测的标签
                 # 获取模型保存的路径
                 if model_name == 'NN':
-                    filename = get_model_path(p, data_type, class_type, model_name, 1, i)
+                    filename = model_save_path + '/NN_feature_cut_' + str(i)
                 else:
-                    filename = get_model_path(p, data_type, class_type, model_name, time_steps, i)
+                    filename = model_save_path + '/' + model_name + '_feature_cut_' + str(time_steps) + '_' + str(i)
                 best_TSS = show_score_and_save_weights(  # 计算最好的TSS，并保存取得最好的TSS的权重
                     model=model,
                     best_TSS=best_TSS,
@@ -101,7 +100,7 @@ def train(p: str, file_config, data_type: str, model_name, class_type, get_model
                 )
                 loss_list.append(history.history['loss'])
                 val_loss_list.append(history.history['val_loss'])
-                print('==================' + model_name + ' ' + feature_cut_list + '====================')
+                print('==================' + model_name + ' ' + str(len(feature_cut_list)) + '====================')
             best_TSS_list.append(best_TSS)
             K.clear_session()
         # 全部训练完成后，打印所有权重的指标

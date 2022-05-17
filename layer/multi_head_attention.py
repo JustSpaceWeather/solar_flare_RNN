@@ -5,7 +5,8 @@ from layer.scaled_dot_attention import ScaledDotProductAttention
 
 
 class MultiHeadAttention(keras.layers.Layer):
-    """Multi-head attention layer.
+    """
+    Multi-head attention layer.
     See: https://arxiv.org/pdf/1706.03762.pdf Attention Is All You Need
     github: https://github.com/CyberZHG/keras-multi-head
     """
